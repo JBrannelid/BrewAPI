@@ -1,4 +1,3 @@
-﻿'# BrewAPI
 
 ![Café Interior](https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&auto=format&fit=crop&q=80)
 
@@ -28,4 +27,4 @@ BrewAPI is an ASP.NET Core Web API for restaurant booking system developed as pa
 4. Start the project: dotnet run
 
 ## API Endpoints
-The API provides comprehensive endpoints for managing restaurant operations including menu items, table bookings, customer information, and administrative functions. Authentication is required for administrative operations, while public endpoints are available for viewing menus and creating bookings.' | Out-File -FilePath README.md -Encoding utf8
+The API provides comprehensive endpoints for managing restaurant operations including menu items, table bookings, customer information, and administrative functions. Authentication is required for administrative operations, while public endpoints are available for viewing menus and creating bookings.
