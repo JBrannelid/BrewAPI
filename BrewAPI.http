@@ -1,0 +1,6 @@
+@BrewAPI_HostAddress = http://localhost:5290
+
+GET {{BrewAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
