@@ -1,7 +1,9 @@
 @'
 # BrewAPI
 
-![Café Interior](https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&auto=format&fit=crop&q=80)
+<div align="center">
+  <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&auto=format&fit=crop&q=80" alt="Café Interior" width="600">
+</div>
 
 ## Description
 BrewAPI is an ASP.NET Core Web API for restaurant booking system developed as part of Lab 1: ASP.NET API + Database at Chas Academy - Stockholm.
