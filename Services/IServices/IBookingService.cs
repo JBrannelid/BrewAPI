@@ -12,7 +12,7 @@ namespace BrewAPI.Services.IServices
 
         Task<List<BookingDTO>> GetBookingsByTableIdAndDateAsync(int tableId, DateOnly date);
 
-        Task<int> CreateBookingAsync(CreateBookingDto createBookingDto);
+        Task<int?> CreateBookingAsync(CreateBookingDto createBookingDto);
 
         Task<bool> UpdateBookingAsync(int bookingId, UpdateBookingDto updateBookingDto);
 
