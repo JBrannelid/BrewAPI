@@ -68,7 +68,12 @@ namespace BrewAPI.Controllers
         public async Task<ActionResult<int>> CreateBooking(CreateBookingDto createBookingDto)
         {
             var bookingId = await _bookingService.CreateBookingAsync(createBookingDto);
-            // Returning 201 Created with location header
+
+            if (bookingId == null)
+            {
+                return Conflict(new { message = "The table is not available at the selected time." });
+            }
+
             return CreatedAtAction(nameof(GetBookingById), new { id = bookingId }, bookingId);
         }
 
