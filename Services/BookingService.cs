@@ -158,8 +158,22 @@ namespace BrewAPI.Services
         }
 
         // Creates a new booking with default duration from booking settings class
-        public async Task<int> CreateBookingAsync(CreateBookingDto createBookingDto)
+        public async Task<int?> CreateBookingAsync(CreateBookingDto createBookingDto)
         {
+            // Validate table availability before creation to prevent race conditions
+            var availableTables = await GetAvailableTablesAsync(new AvailableTablesRequestDto
+            {
+                BookingDate = createBookingDto.BookingDate,
+                BookingTime = createBookingDto.BookingTime,
+                NumberGuests = createBookingDto.NumberGuests
+            });
+
+            // Return null if table is not available
+            if (!availableTables.Any(t => t.TableId == createBookingDto.TableId))
+            {
+                return null;
+            }
+
             var booking = new Booking
             {
                 FK_CustomerId = createBookingDto.CustomerId,
@@ -171,9 +185,7 @@ namespace BrewAPI.Services
                 DurationTime = TimeSpan.FromHours(BookingSettings.DefaultBookingDurationHours)
             };
 
-            var newBookingId = await _bookingRepository.CreateBookingAsync(booking);
-            // Returns the Id of the created booking
-            return newBookingId;
+            return await _bookingRepository.CreateBookingAsync(booking);
         }
 
         // Updates an existing booking or returns false if not found
