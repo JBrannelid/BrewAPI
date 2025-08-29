@@ -157,7 +157,7 @@ namespace BrewAPI.Services
             return bookingDTOs;
         }
 
-        // Creates a new booking with default duration from booking settings class
+        // Creates a new booking with default duration after validating table availability
         public async Task<int?> CreateBookingAsync(CreateBookingDto createBookingDto)
         {
             // Validate table availability before creation to prevent race conditions
