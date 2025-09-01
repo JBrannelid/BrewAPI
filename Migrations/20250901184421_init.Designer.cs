@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrewAPI.Migrations
 {
     [DbContext(typeof(BrewAPIDbContext))]
-    [Migration("20250828190737_Init1.0")]
-    partial class Init10
+    [Migration("20250901184421_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,7 +69,7 @@ namespace BrewAPI.Migrations
                         new
                         {
                             PK_BookingId = 1,
-                            BookingDate = new DateOnly(2025, 8, 29),
+                            BookingDate = new DateOnly(2025, 9, 2),
                             BookingTime = new TimeOnly(18, 30, 0),
                             DurationTime = new TimeSpan(0, 2, 0, 0, 0),
                             FK_CustomerId = 1,
@@ -80,7 +80,7 @@ namespace BrewAPI.Migrations
                         new
                         {
                             PK_BookingId = 2,
-                            BookingDate = new DateOnly(2025, 8, 30),
+                            BookingDate = new DateOnly(2025, 9, 3),
                             BookingTime = new TimeOnly(19, 0, 0),
                             DurationTime = new TimeSpan(0, 2, 0, 0, 0),
                             FK_CustomerId = 2,
@@ -183,7 +183,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 1,
                             Category = "Salads",
                             Description = "Handskalade räkor, bacon, cocktailtomat, rostade kruttonger, picklad rödlök, grana padano",
-                            ImageUrl = "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400",
+                            ImageUrl = "https://unsplash.com/photos/vegetable-salad-on-white-ceramic-bowl-gOJxrVvhCF8",
                             IsPopular = true,
                             Name = "Ceasarsallad Räkor",
                             Price = 145.00m
@@ -191,6 +191,26 @@ namespace BrewAPI.Migrations
                         new
                         {
                             PK_MenuItemId = 2,
+                            Category = "Salads",
+                            Description = "Svensk kyckling, caesar dressing, rödlök, ugnsbakade cocktailtomater, parmesan, & egenrostade krutonger",
+                            ImageUrl = "https://unsplash.com/photos/vegetable-salad-pCxJvSeSB5A",
+                            IsPopular = true,
+                            Name = "Ceasarsallad",
+                            Price = 145.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 3,
+                            Category = "Salads",
+                            Description = "Halstrad tonfiskfilé med sallad citron & korianderkräm",
+                            ImageUrl = "https://unsplash.com/photos/vegetable-salad-on-white-ceramic-bowl-LJ49dflDcH8",
+                            IsPopular = false,
+                            Name = "Tonfisksallad",
+                            Price = 145.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 4,
                             Category = "Salads",
                             Description = "Rostade valnötter, fikon, rödbetor, äpple och rädisor, cocktailtomater, honung, ärtskott.",
                             ImageUrl = "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400",
@@ -200,30 +220,160 @@ namespace BrewAPI.Migrations
                         },
                         new
                         {
-                            PK_MenuItemId = 3,
+                            PK_MenuItemId = 5,
+                            Category = "Bowls",
+                            Description = "Bulgogimarinerat högrev, bakat ägg, kimchi, morötter, spenat, böngroddar, furikake, sesamfrön, gochujangsås, sojamayo",
+                            ImageUrl = "https://unsplash.com/photos/vegetable-and-meat-on-bowl-kcA-c3f_3FE",
+                            IsPopular = true,
+                            Name = "Din-Din Bap Bowl",
+                            Price = 188.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 6,
+                            Category = "Bowls",
+                            Description = "Kycklinglårfilé, ris, mango, teriyaksås, sojamajo, salladslök, togarashi, chili, soja, avokado, sojabönor, kimchi, picklad rödkål, smashed spicy cucumber",
+                            ImageUrl = "https://unsplash.com/photos/vegetable-and-meat-on-bowl-kcA-c3f_3FE",
+                            IsPopular = false,
+                            Name = "Sneaky Samurai Bowl",
+                            Price = 164.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 7,
+                            Category = "Bowls",
+                            Description = "Kycklinglårfilé, ris, mango, teriyaksås, sojamajo, salladslök, togarashi, chili, soja, avokado, sojabönor, kimchi, picklad rödkål, smashed spicy cucumber",
+                            ImageUrl = "Gochujangmarienerad, Karaage-kyckling, ris, picklad rödkål, soja, avokado, sojabönor, kimichi, svart sesamfrö, gräslök , smashed spicy cucumber",
+                            IsPopular = false,
+                            Name = "Karaage Bowl",
+                            Price = 164.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 8,
                             Category = "Desserts",
                             Description = "Fransk crêpe med pistagekräm, choklad och vaniljglass",
-                            ImageUrl = "https://images.unsplash.com/photo-1506459225024-1428097a7e18?w=400",
+                            ImageUrl = "https://unsplash.com/photos/a-person-cooking-pancakes-in-a-pan-on-a-stove-465ZLD7Ia2s",
                             IsPopular = true,
                             Name = "Dubai chocolate crêpe",
                             Price = 85.00m
                         },
                         new
                         {
-                            PK_MenuItemId = 4,
+                            PK_MenuItemId = 9,
+                            Category = "Desserts",
+                            Description = "Frasig croissant bakad med smör",
+                            ImageUrl = "https://unsplash.com/photos/a-person-cooking-pancakes-in-a-pan-on-a-stove-465ZLD7Ia2s",
+                            IsPopular = false,
+                            Name = "Croissant",
+                            Price = 45.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 10,
+                            Category = "Desserts",
+                            Description = "Vetebulle bakad med surdeg, fylld med pumpafyllning och toppad med majssmulor.",
+                            ImageUrl = "https://unsplash.com/photos/brown-bread-on-brown-wooden-chopping-board-UaU8hu9IJQY",
+                            IsPopular = false,
+                            Name = "Pumpkin Bun",
+                            Price = 45.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 11,
+                            Category = "Desserts",
+                            Description = "Kladdkaka som serveras med vispgrädde och vaniljglass",
+                            ImageUrl = "https://unsplash.com/photos/a-plate-with-a-piece-of-cake-and-berries-on-it-JXEzhndND7I",
+                            IsPopular = true,
+                            Name = "Mudcake",
+                            Price = 65.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 12,
+                            Category = "Desserts",
+                            Description = "En rund kak- och gräddmousse med chokladsmulor",
+                            ImageUrl = "https://unsplash.com/photos/a-person-holding-a-spoon-with-a-dessert-on-it-NuATPGDYSIw",
+                            IsPopular = true,
+                            Name = "Moussekaka Cookies & Cream",
+                            Price = 65.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 13,
                             Category = "Beverages",
                             Description = "Krämig cappuccino med perfekt mjölkskum",
                             ImageUrl = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400",
-                            IsPopular = true,
+                            IsPopular = false,
                             Name = "Cappuccino",
                             Price = 45.00m
                         },
                         new
                         {
-                            PK_MenuItemId = 5,
+                            PK_MenuItemId = 14,
+                            Category = "Beverages",
+                            Description = "Sötat grönt matchate, serverat med kall havredryck och is",
+                            ImageUrl = "https://unsplash.com/photos/a-shot-glass-filled-with-green-liquid-on-top-of-a-wooden-table-N1rmKN_EOaA",
+                            IsPopular = true,
+                            Name = "Ismatcha",
+                            Price = 45.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 15,
+                            Category = "Beverages",
+                            Description = "Espresso blandat med kall mjölk och is",
+                            ImageUrl = "https://unsplash.com/photos/clear-glass-filled-ice-coffee-vZOZJH_xkUk",
+                            IsPopular = false,
+                            Name = "Iced Latte",
+                            Price = 45.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 16,
+                            Category = "Beverages",
+                            Description = "Espresso blandat med mjölk",
+                            ImageUrl = "https://unsplash.com/photos/closeup-photo-of-coffee-wecVUUVopRY",
+                            IsPopular = false,
+                            Name = "Latte",
+                            Price = 45.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 17,
+                            Category = "Beverages",
+                            Description = "Blonde Roast - Veranda Blend",
+                            ImageUrl = "https://unsplash.com/photos/white-ceramic-teacup-with-coffee-beans-lsmu0rUhUOk",
+                            IsPopular = false,
+                            Name = "Hot Coffee",
+                            Price = 45.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 18,
+                            Category = "Beverages",
+                            Description = "Vaniljshake med smak av choklad. Toppad med vispgrädde",
+                            ImageUrl = "https://unsplash.com/photos/chocolate-cookie-frappe-4FujjkcI40g",
+                            IsPopular = true,
+                            Name = "Caramel Frappuccino",
+                            Price = 45.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 19,
+                            Category = "Beverages",
+                            Description = "Kaffeshake med smak av kola. Toppad med vispgrädde",
+                            ImageUrl = "https://unsplash.com/photos/a-close-up-of-a-cup-of-food-on-a-table-OSYt_g-EoPE",
+                            IsPopular = false,
+                            Name = "Caramel Frappuccino",
+                            Price = 45.00m
+                        },
+                        new
+                        {
+                            PK_MenuItemId = 20,
                             Category = "Beverages",
                             Description = "Grönt, svart eller rött té i olika smaker",
-                            ImageUrl = "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400",
+                            ImageUrl = "https://unsplash.com/photos/a-person-pours-tea-into-a-cup-XbYnaCbUWnI",
                             IsPopular = false,
                             Name = "Tea Selection",
                             Price = 40.00m
