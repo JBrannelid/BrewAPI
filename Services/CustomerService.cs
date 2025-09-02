@@ -1,4 +1,4 @@
-﻿using BrewAPI.DTOs;
+﻿using BrewAPI.DTOs.Customers;
 using BrewAPI.Models;
 using BrewAPI.Repositories.IRepositories;
 using BrewAPI.Services.IServices;
@@ -51,13 +51,13 @@ namespace BrewAPI.Services
         }
 
         // Creates a new customer in the database and returns the new Id (primary key)
-        public async Task<int> CreateCustomerAsync(CustomerDTO customerDTO)
+        public async Task<int> CreateCustomerAsync(CreateCustomerDTO createCustomerDTO)
         {
             var customer = new Customer
             {
-                Name = customerDTO.Name,
-                PhoneNumber = customerDTO.PhoneNumber,
-                Email = customerDTO.Email
+                Name = createCustomerDTO.Name,
+                PhoneNumber = createCustomerDTO.PhoneNumber,
+                Email = createCustomerDTO.Email
             };
 
             var newCustomerId = await _customerRepository.AddCustomerAsync(customer);
@@ -65,7 +65,7 @@ namespace BrewAPI.Services
         }
 
         // Updates an existing customer. Returns true if update was successful, false if customer not found
-        public async Task<bool> UpdateCustomerAsync(int customerId, CustomerDTO customerDTO)
+        public async Task<bool> UpdateCustomerAsync(int customerId, UpdateCustomerDTO updateCustomerDTO)
         {
             var existingCustomer = await _customerRepository.GetCustomerByIdAsync(customerId);
             if (existingCustomer == null)
@@ -73,9 +73,9 @@ namespace BrewAPI.Services
                 return false;
             }
 
-            existingCustomer.Name = customerDTO.Name;
-            existingCustomer.PhoneNumber = customerDTO.PhoneNumber;
-            existingCustomer.Email = customerDTO.Email;
+            existingCustomer.Name = updateCustomerDTO.Name;
+            existingCustomer.PhoneNumber = updateCustomerDTO.PhoneNumber;
+            existingCustomer.Email = updateCustomerDTO.Email;
 
             return await _customerRepository.UpdateCustomerAsync(existingCustomer);
         }
