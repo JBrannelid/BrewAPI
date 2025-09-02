@@ -1,4 +1,4 @@
-﻿using BrewAPI.DTOs;
+﻿using BrewAPI.DTOs.Customers;
 
 namespace BrewAPI.Services.IServices
 {
@@ -8,9 +8,9 @@ namespace BrewAPI.Services.IServices
 
         Task<CustomerDTO?> GetCustomerByIdAsync(int customerId);
 
-        Task<int> CreateCustomerAsync(CustomerDTO customerDTO);
+        Task<int> CreateCustomerAsync(CreateCustomerDTO createCustomerDTO);
 
-        Task<bool> UpdateCustomerAsync(int customerId, CustomerDTO customerDTO);
+        Task<bool> UpdateCustomerAsync(int customerId, UpdateCustomerDTO updateCustomerDTO);
 
         Task<bool> DeleteCustomerAsync(int customerId);
     }
