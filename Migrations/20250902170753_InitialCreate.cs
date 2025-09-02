@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BrewAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -123,8 +123,8 @@ namespace BrewAPI.Migrations
                 columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "IsPopular", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, "Salads", "Handskalade räkor, bacon, cocktailtomat, rostade kruttonger, picklad rödlök, grana padano", "https://unsplash.com/photos/vegetable-salad-on-white-ceramic-bowl-gOJxrVvhCF8", true, "Ceasarsallad Räkor", 145.00m },
-                    { 2, "Salads", "Svensk kyckling, caesar dressing, rödlök, ugnsbakade cocktailtomater, parmesan, & egenrostade krutonger", "https://unsplash.com/photos/vegetable-salad-pCxJvSeSB5A", true, "Ceasarsallad", 145.00m }
+                    { 1, "Salads", "Handskalade räkor, bacon, cocktailtomat, rostade kruttonger, picklad rödlök, grana padano", "https://images.unsplash.com/photo-1551248429-40975aa4de74?w=400", true, "Ceasarsallad Räkor", 145.00m },
+                    { 2, "Salads", "Svensk kyckling, caesar dressing, rödlök, ugnsbakade cocktailtomater, parmesan, & egenrostade krutonger", "https://images.unsplash.com/photo-1546793665-c74683f339c1?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=400", true, "Ceasarsallad", 145.00m }
                 });
 
             migrationBuilder.InsertData(
@@ -132,36 +132,36 @@ namespace BrewAPI.Migrations
                 columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 3, "Salads", "Halstrad tonfiskfilé med sallad citron & korianderkräm", "https://unsplash.com/photos/vegetable-salad-on-white-ceramic-bowl-LJ49dflDcH8", "Tonfisksallad", 145.00m },
+                    { 3, "Salads", "Halstrad tonfiskfilé med sallad citron & korianderkräm", "https://images.unsplash.com/photo-1604909052743-94e838986d24?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=400", "Tonfisksallad", 145.00m },
                     { 4, "Salads", "Rostade valnötter, fikon, rödbetor, äpple och rädisor, cocktailtomater, honung, ärtskott.", "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400", "Chevré Salad", 125.00m }
                 });
 
             migrationBuilder.InsertData(
                 table: "MenuItems",
                 columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "IsPopular", "Name", "Price" },
-                values: new object[] { 5, "Bowls", "Bulgogimarinerat högrev, bakat ägg, kimchi, morötter, spenat, böngroddar, furikake, sesamfrön, gochujangsås, sojamayo", "https://unsplash.com/photos/vegetable-and-meat-on-bowl-kcA-c3f_3FE", true, "Din-Din Bap Bowl", 188.00m });
+                values: new object[] { 5, "Bowls", "Bulgogimarinerat högrev, bakat ägg, kimchi, morötter, spenat, böngroddar, furikake, sesamfrön, gochujangsås, sojamayo", "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", true, "Din-Din Bap Bowl", 188.00m });
 
             migrationBuilder.InsertData(
                 table: "MenuItems",
                 columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 6, "Bowls", "Kycklinglårfilé, ris, mango, teriyaksås, sojamajo, salladslök, togarashi, chili, soja, avokado, sojabönor, kimchi, picklad rödkål, smashed spicy cucumber", "https://unsplash.com/photos/vegetable-and-meat-on-bowl-kcA-c3f_3FE", "Sneaky Samurai Bowl", 164.00m },
-                    { 7, "Bowls", "Kycklinglårfilé, ris, mango, teriyaksås, sojamajo, salladslök, togarashi, chili, soja, avokado, sojabönor, kimchi, picklad rödkål, smashed spicy cucumber", "Gochujangmarienerad, Karaage-kyckling, ris, picklad rödkål, soja, avokado, sojabönor, kimichi, svart sesamfrö, gräslök , smashed spicy cucumber", "Karaage Bowl", 164.00m }
+                    { 6, "Bowls", "Kycklinglårfilé, ris, mango, teriyaksås, sojamajo, salladslök, togarashi, chili, soja, avokado, sojabönor, kimchi, picklad rödkål, smashed spicy cucumber", "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "Sneaky Samurai Bowl", 164.00m },
+                    { 7, "Bowls", "Kycklinglårfilé, ris, mango, teriyaksås, sojamajo, salladslök, togarashi, chili, soja, avokado, sojabönor, kimchi, picklad rödkål, smashed spicy cucumber", "https://plus.unsplash.com/premium_photo-1705056547195-a68c45f2d77e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZCUyMGJvd2x8ZW58MHx8MHx8fDA%3D", "Karaage Bowl", 164.00m }
                 });
 
             migrationBuilder.InsertData(
                 table: "MenuItems",
                 columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "IsPopular", "Name", "Price" },
-                values: new object[] { 8, "Desserts", "Fransk crêpe med pistagekräm, choklad och vaniljglass", "https://unsplash.com/photos/a-person-cooking-pancakes-in-a-pan-on-a-stove-465ZLD7Ia2s", true, "Dubai chocolate crêpe", 85.00m });
+                values: new object[] { 8, "Desserts", "Fransk crêpe med pistagekräm, choklad och vaniljglass", "https://images.unsplash.com/photo-1723691802547-b79f65c16b5f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", true, "Dubai chocolate crêpe", 85.00m });
 
             migrationBuilder.InsertData(
                 table: "MenuItems",
                 columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 9, "Desserts", "Frasig croissant bakad med smör", "https://unsplash.com/photos/a-person-cooking-pancakes-in-a-pan-on-a-stove-465ZLD7Ia2s", "Croissant", 45.00m },
-                    { 10, "Desserts", "Vetebulle bakad med surdeg, fylld med pumpafyllning och toppad med majssmulor.", "https://unsplash.com/photos/brown-bread-on-brown-wooden-chopping-board-UaU8hu9IJQY", "Pumpkin Bun", 45.00m }
+                    { 9, "Desserts", "Frasig croissant bakad med smör", "https://images.unsplash.com/photo-1723691802547-b79f65c16b5f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "Croissant", 45.00m },
+                    { 10, "Desserts", "Vetebulle bakad med surdeg, fylld med pumpafyllning och toppad med majssmulor.", "https://images.unsplash.com/photo-1589783361701-d5161a106415?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3DY", "Pumpkin Bun", 45.00m }
                 });
 
             migrationBuilder.InsertData(
@@ -169,8 +169,8 @@ namespace BrewAPI.Migrations
                 columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "IsPopular", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 11, "Desserts", "Kladdkaka som serveras med vispgrädde och vaniljglass", "https://unsplash.com/photos/a-plate-with-a-piece-of-cake-and-berries-on-it-JXEzhndND7I", true, "Mudcake", 65.00m },
-                    { 12, "Desserts", "En rund kak- och gräddmousse med chokladsmulor", "https://unsplash.com/photos/a-person-holding-a-spoon-with-a-dessert-on-it-NuATPGDYSIw", true, "Moussekaka Cookies & Cream", 65.00m }
+                    { 11, "Desserts", "Kladdkaka som serveras med vispgrädde och vaniljglass", "https://images.unsplash.com/photo-1705472017435-7a820b01f36c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", true, "Mudcake", 65.00m },
+                    { 12, "Desserts", "En rund kak- och gräddmousse med chokladsmulor", "https://plus.unsplash.com/premium_photo-1695028377713-f5e5424b1e7e?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", true, "Moussekaka Cookies & Cream", 65.00m }
                 });
 
             migrationBuilder.InsertData(
@@ -181,31 +181,32 @@ namespace BrewAPI.Migrations
             migrationBuilder.InsertData(
                 table: "MenuItems",
                 columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "IsPopular", "Name", "Price" },
-                values: new object[] { 14, "Beverages", "Sötat grönt matchate, serverat med kall havredryck och is", "https://unsplash.com/photos/a-shot-glass-filled-with-green-liquid-on-top-of-a-wooden-table-N1rmKN_EOaA", true, "Ismatcha", 45.00m });
+                values: new object[] { 14, "Beverages", "Sötat grönt matchate, serverat med kall havredryck och is", "https://images.unsplash.com/photo-1717603545758-88cc454db69b?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", true, "Ismatcha", 45.00m });
 
             migrationBuilder.InsertData(
                 table: "MenuItems",
                 columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 15, "Beverages", "Espresso blandat med kall mjölk och is", "https://unsplash.com/photos/clear-glass-filled-ice-coffee-vZOZJH_xkUk", "Iced Latte", 45.00m },
-                    { 16, "Beverages", "Espresso blandat med mjölk", "https://unsplash.com/photos/closeup-photo-of-coffee-wecVUUVopRY", "Latte", 45.00m },
-                    { 17, "Beverages", "Blonde Roast - Veranda Blend", "https://unsplash.com/photos/white-ceramic-teacup-with-coffee-beans-lsmu0rUhUOk", "Hot Coffee", 45.00m }
+                    { 15, "Beverages", "Espresso blandat med kall mjölk och is", "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "Iced Latte", 45.00m },
+                    { 16, "Beverages", "Espresso blandat med mjölk", "https://images.unsplash.com/photo-1574914629385-46448b767aec?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "Latte", 45.00m },
+                    { 17, "Beverages", "Blonde Roast - Veranda Blend", "https://images.unsplash.com/photo-1610632380989-680fe40816c6?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "Hot Coffee", 45.00m }
                 });
 
             migrationBuilder.InsertData(
                 table: "MenuItems",
                 columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "IsPopular", "Name", "Price" },
-                values: new object[] { 18, "Beverages", "Vaniljshake med smak av choklad. Toppad med vispgrädde", "https://unsplash.com/photos/chocolate-cookie-frappe-4FujjkcI40g", true, "Caramel Frappuccino", 45.00m });
+                values: new object[] { 18, "Beverages", "Vaniljshake med smak av choklad. Toppad med vispgrädde", "https://images.unsplash.com/photo-1572490122747-3968b75cc699?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", true, "Caramel Frappuccino", 45.00m });
 
             migrationBuilder.InsertData(
                 table: "MenuItems",
                 columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "Name", "Price" },
-                values: new object[,]
-                {
-                    { 19, "Beverages", "Kaffeshake med smak av kola. Toppad med vispgrädde", "https://unsplash.com/photos/a-close-up-of-a-cup-of-food-on-a-table-OSYt_g-EoPE", "Caramel Frappuccino", 45.00m },
-                    { 20, "Beverages", "Grönt, svart eller rött té i olika smaker", "https://unsplash.com/photos/a-person-pours-tea-into-a-cup-XbYnaCbUWnI", "Tea Selection", 40.00m }
-                });
+                values: new object[] { 19, "Beverages", "Kaffeshake med smak av kola. Toppad med vispgrädde", "https://images.unsplash.com/photo-1637178035222-a08f2d4dd1a3?q=80&w=756&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "Caramel Frappuccino", 45.00m });
+
+            migrationBuilder.InsertData(
+                table: "MenuItems",
+                columns: new[] { "PK_MenuItemId", "Category", "Description", "ImageUrl", "IsPopular", "Name", "Price" },
+                values: new object[] { 20, "Beverages", "Grönt, svart eller rött té i olika smaker", "https://plus.unsplash.com/premium_photo-1674406481284-43eba097a291?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", true, "Tea Selection", 40.00m });
 
             migrationBuilder.InsertData(
                 table: "Tables",
@@ -221,17 +222,12 @@ namespace BrewAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "UserId", "Email", "FirstName", "LastName", "PasswordHash", "Role" },
-                values: new object[] { 1, "test@exempel.com", "Johannes", "Brannelid", "$2a$11$8Xl3E5qDNqK0rV2QcMkV4eJ1Q8P7K9zF0nR6tY3sW2hA5cU1mB7dO", "Admin" });
-
-            migrationBuilder.InsertData(
                 table: "Bookings",
                 columns: new[] { "PK_BookingId", "BookingDate", "BookingTime", "DurationTime", "FK_CustomerId", "FK_TableId", "NumberGuests", "Status" },
                 values: new object[,]
                 {
-                    { 1, new DateOnly(2025, 9, 2), new TimeOnly(18, 30, 0), new TimeSpan(0, 2, 0, 0, 0), 1, 1, 2, "Confirmed" },
-                    { 2, new DateOnly(2025, 9, 3), new TimeOnly(19, 0, 0), new TimeSpan(0, 2, 0, 0, 0), 2, 3, 4, "Confirmed" }
+                    { 1, new DateOnly(2025, 9, 15), new TimeOnly(18, 30, 0), new TimeSpan(0, 2, 0, 0, 0), 1, 1, 2, "Confirmed" },
+                    { 2, new DateOnly(2025, 9, 16), new TimeOnly(19, 0, 0), new TimeSpan(0, 2, 0, 0, 0), 2, 3, 4, "Confirmed" }
                 });
 
             migrationBuilder.CreateIndex(

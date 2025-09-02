@@ -486,17 +486,6 @@ namespace BrewAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Email = "test@exempel.com",
-                            FirstName = "Johannes",
-                            LastName = "Brannelid",
-                            PasswordHash = "$2a$11$8Xl3E5qDNqK0rV2QcMkV4eJ1Q8P7K9zF0nR6tY3sW2hA5cU1mB7dO",
-                            Role = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("BrewAPI.Models.Booking", b =>

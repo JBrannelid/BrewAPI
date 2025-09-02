@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrewAPI.Migrations
 {
     [DbContext(typeof(BrewAPIDbContext))]
-    [Migration("20250901184421_init")]
-    partial class init
+    [Migration("20250902170753_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,7 +69,7 @@ namespace BrewAPI.Migrations
                         new
                         {
                             PK_BookingId = 1,
-                            BookingDate = new DateOnly(2025, 9, 2),
+                            BookingDate = new DateOnly(2025, 9, 15),
                             BookingTime = new TimeOnly(18, 30, 0),
                             DurationTime = new TimeSpan(0, 2, 0, 0, 0),
                             FK_CustomerId = 1,
@@ -80,7 +80,7 @@ namespace BrewAPI.Migrations
                         new
                         {
                             PK_BookingId = 2,
-                            BookingDate = new DateOnly(2025, 9, 3),
+                            BookingDate = new DateOnly(2025, 9, 16),
                             BookingTime = new TimeOnly(19, 0, 0),
                             DurationTime = new TimeSpan(0, 2, 0, 0, 0),
                             FK_CustomerId = 2,
@@ -183,7 +183,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 1,
                             Category = "Salads",
                             Description = "Handskalade räkor, bacon, cocktailtomat, rostade kruttonger, picklad rödlök, grana padano",
-                            ImageUrl = "https://unsplash.com/photos/vegetable-salad-on-white-ceramic-bowl-gOJxrVvhCF8",
+                            ImageUrl = "https://images.unsplash.com/photo-1551248429-40975aa4de74?w=400",
                             IsPopular = true,
                             Name = "Ceasarsallad Räkor",
                             Price = 145.00m
@@ -193,7 +193,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 2,
                             Category = "Salads",
                             Description = "Svensk kyckling, caesar dressing, rödlök, ugnsbakade cocktailtomater, parmesan, & egenrostade krutonger",
-                            ImageUrl = "https://unsplash.com/photos/vegetable-salad-pCxJvSeSB5A",
+                            ImageUrl = "https://images.unsplash.com/photo-1546793665-c74683f339c1?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=400",
                             IsPopular = true,
                             Name = "Ceasarsallad",
                             Price = 145.00m
@@ -203,7 +203,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 3,
                             Category = "Salads",
                             Description = "Halstrad tonfiskfilé med sallad citron & korianderkräm",
-                            ImageUrl = "https://unsplash.com/photos/vegetable-salad-on-white-ceramic-bowl-LJ49dflDcH8",
+                            ImageUrl = "https://images.unsplash.com/photo-1604909052743-94e838986d24?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=400",
                             IsPopular = false,
                             Name = "Tonfisksallad",
                             Price = 145.00m
@@ -223,7 +223,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 5,
                             Category = "Bowls",
                             Description = "Bulgogimarinerat högrev, bakat ägg, kimchi, morötter, spenat, böngroddar, furikake, sesamfrön, gochujangsås, sojamayo",
-                            ImageUrl = "https://unsplash.com/photos/vegetable-and-meat-on-bowl-kcA-c3f_3FE",
+                            ImageUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = true,
                             Name = "Din-Din Bap Bowl",
                             Price = 188.00m
@@ -233,7 +233,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 6,
                             Category = "Bowls",
                             Description = "Kycklinglårfilé, ris, mango, teriyaksås, sojamajo, salladslök, togarashi, chili, soja, avokado, sojabönor, kimchi, picklad rödkål, smashed spicy cucumber",
-                            ImageUrl = "https://unsplash.com/photos/vegetable-and-meat-on-bowl-kcA-c3f_3FE",
+                            ImageUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = false,
                             Name = "Sneaky Samurai Bowl",
                             Price = 164.00m
@@ -243,7 +243,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 7,
                             Category = "Bowls",
                             Description = "Kycklinglårfilé, ris, mango, teriyaksås, sojamajo, salladslök, togarashi, chili, soja, avokado, sojabönor, kimchi, picklad rödkål, smashed spicy cucumber",
-                            ImageUrl = "Gochujangmarienerad, Karaage-kyckling, ris, picklad rödkål, soja, avokado, sojabönor, kimichi, svart sesamfrö, gräslök , smashed spicy cucumber",
+                            ImageUrl = "https://plus.unsplash.com/premium_photo-1705056547195-a68c45f2d77e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZCUyMGJvd2x8ZW58MHx8MHx8fDA%3D",
                             IsPopular = false,
                             Name = "Karaage Bowl",
                             Price = 164.00m
@@ -253,7 +253,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 8,
                             Category = "Desserts",
                             Description = "Fransk crêpe med pistagekräm, choklad och vaniljglass",
-                            ImageUrl = "https://unsplash.com/photos/a-person-cooking-pancakes-in-a-pan-on-a-stove-465ZLD7Ia2s",
+                            ImageUrl = "https://images.unsplash.com/photo-1723691802547-b79f65c16b5f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = true,
                             Name = "Dubai chocolate crêpe",
                             Price = 85.00m
@@ -263,7 +263,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 9,
                             Category = "Desserts",
                             Description = "Frasig croissant bakad med smör",
-                            ImageUrl = "https://unsplash.com/photos/a-person-cooking-pancakes-in-a-pan-on-a-stove-465ZLD7Ia2s",
+                            ImageUrl = "https://images.unsplash.com/photo-1723691802547-b79f65c16b5f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = false,
                             Name = "Croissant",
                             Price = 45.00m
@@ -273,7 +273,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 10,
                             Category = "Desserts",
                             Description = "Vetebulle bakad med surdeg, fylld med pumpafyllning och toppad med majssmulor.",
-                            ImageUrl = "https://unsplash.com/photos/brown-bread-on-brown-wooden-chopping-board-UaU8hu9IJQY",
+                            ImageUrl = "https://images.unsplash.com/photo-1589783361701-d5161a106415?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3DY",
                             IsPopular = false,
                             Name = "Pumpkin Bun",
                             Price = 45.00m
@@ -283,7 +283,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 11,
                             Category = "Desserts",
                             Description = "Kladdkaka som serveras med vispgrädde och vaniljglass",
-                            ImageUrl = "https://unsplash.com/photos/a-plate-with-a-piece-of-cake-and-berries-on-it-JXEzhndND7I",
+                            ImageUrl = "https://images.unsplash.com/photo-1705472017435-7a820b01f36c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = true,
                             Name = "Mudcake",
                             Price = 65.00m
@@ -293,7 +293,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 12,
                             Category = "Desserts",
                             Description = "En rund kak- och gräddmousse med chokladsmulor",
-                            ImageUrl = "https://unsplash.com/photos/a-person-holding-a-spoon-with-a-dessert-on-it-NuATPGDYSIw",
+                            ImageUrl = "https://plus.unsplash.com/premium_photo-1695028377713-f5e5424b1e7e?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = true,
                             Name = "Moussekaka Cookies & Cream",
                             Price = 65.00m
@@ -313,7 +313,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 14,
                             Category = "Beverages",
                             Description = "Sötat grönt matchate, serverat med kall havredryck och is",
-                            ImageUrl = "https://unsplash.com/photos/a-shot-glass-filled-with-green-liquid-on-top-of-a-wooden-table-N1rmKN_EOaA",
+                            ImageUrl = "https://images.unsplash.com/photo-1717603545758-88cc454db69b?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = true,
                             Name = "Ismatcha",
                             Price = 45.00m
@@ -323,7 +323,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 15,
                             Category = "Beverages",
                             Description = "Espresso blandat med kall mjölk och is",
-                            ImageUrl = "https://unsplash.com/photos/clear-glass-filled-ice-coffee-vZOZJH_xkUk",
+                            ImageUrl = "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = false,
                             Name = "Iced Latte",
                             Price = 45.00m
@@ -333,7 +333,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 16,
                             Category = "Beverages",
                             Description = "Espresso blandat med mjölk",
-                            ImageUrl = "https://unsplash.com/photos/closeup-photo-of-coffee-wecVUUVopRY",
+                            ImageUrl = "https://images.unsplash.com/photo-1574914629385-46448b767aec?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = false,
                             Name = "Latte",
                             Price = 45.00m
@@ -343,7 +343,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 17,
                             Category = "Beverages",
                             Description = "Blonde Roast - Veranda Blend",
-                            ImageUrl = "https://unsplash.com/photos/white-ceramic-teacup-with-coffee-beans-lsmu0rUhUOk",
+                            ImageUrl = "https://images.unsplash.com/photo-1610632380989-680fe40816c6?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = false,
                             Name = "Hot Coffee",
                             Price = 45.00m
@@ -353,7 +353,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 18,
                             Category = "Beverages",
                             Description = "Vaniljshake med smak av choklad. Toppad med vispgrädde",
-                            ImageUrl = "https://unsplash.com/photos/chocolate-cookie-frappe-4FujjkcI40g",
+                            ImageUrl = "https://images.unsplash.com/photo-1572490122747-3968b75cc699?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = true,
                             Name = "Caramel Frappuccino",
                             Price = 45.00m
@@ -363,7 +363,7 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 19,
                             Category = "Beverages",
                             Description = "Kaffeshake med smak av kola. Toppad med vispgrädde",
-                            ImageUrl = "https://unsplash.com/photos/a-close-up-of-a-cup-of-food-on-a-table-OSYt_g-EoPE",
+                            ImageUrl = "https://images.unsplash.com/photo-1637178035222-a08f2d4dd1a3?q=80&w=756&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             IsPopular = false,
                             Name = "Caramel Frappuccino",
                             Price = 45.00m
@@ -373,8 +373,8 @@ namespace BrewAPI.Migrations
                             PK_MenuItemId = 20,
                             Category = "Beverages",
                             Description = "Grönt, svart eller rött té i olika smaker",
-                            ImageUrl = "https://unsplash.com/photos/a-person-pours-tea-into-a-cup-XbYnaCbUWnI",
-                            IsPopular = false,
+                            ImageUrl = "https://plus.unsplash.com/premium_photo-1674406481284-43eba097a291?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            IsPopular = true,
                             Name = "Tea Selection",
                             Price = 40.00m
                         });
@@ -489,17 +489,6 @@ namespace BrewAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Email = "test@exempel.com",
-                            FirstName = "Johannes",
-                            LastName = "Brannelid",
-                            PasswordHash = "$2a$11$8Xl3E5qDNqK0rV2QcMkV4eJ1Q8P7K9zF0nR6tY3sW2hA5cU1mB7dO",
-                            Role = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("BrewAPI.Models.Booking", b =>

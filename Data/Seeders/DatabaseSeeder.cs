@@ -12,7 +12,6 @@ namespace BrewAPI.Data.Seeders
         public void SeedData(ModelBuilder modelBuilder)
         {
             SeedTables(modelBuilder);
-            SeedUsers(modelBuilder);
             SeedCustomers(modelBuilder);
             SeedMenuItems(modelBuilder);
             SeedBookings(modelBuilder);
@@ -30,24 +29,6 @@ namespace BrewAPI.Data.Seeders
                 new Table { PK_TableId = 6, TableNumber = 6, Capacity = 4, IsAvailable = true }
             );
         }
-
-        // Seed users
-        private static void SeedUsers(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>().HasData(
-                new User
-                {
-                    UserId = 1,
-                    FirstName = "Johannes",
-                    LastName = "Brannelid",
-                    Email = "test@exempel.com",
-                    Role = UserRole.Admin,
-                    // Static hash password for avoid dynamic seed data (BCrypt) with each migration
-                    PasswordHash = "$2a$11$8Xl3E5qDNqK0rV2QcMkV4eJ1Q8P7K9zF0nR6tY3sW2hA5cU1mB7dO"
-                }
-            );
-        }
-
         // Seed customers
         private static void SeedCustomers(ModelBuilder modelBuilder)
         {
