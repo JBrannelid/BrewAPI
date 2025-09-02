@@ -42,8 +42,7 @@ namespace BrewAPI.Data.Seeders
                     LastName = "Brannelid",
                     Email = "test@exempel.com",
                     Role = UserRole.Admin,
-                    // Password: "admin123" hashed with BCrypt
-                    PasswordHash = "$2a$11$8Xl3E5qDNqK0rV2QcMkV4eJ1Q8P7K9zF0nR6tY3sW2hA5cU1mB7dO"
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123"),
                 }
             );
         }
