@@ -15,6 +15,16 @@ namespace BrewAPI
             builder.Services.AddControllers();
             builder.Services.AddSwaggerWithJwtSupport();
             builder.Services.AddJwtAuthenticationAndAuthorization(builder.Configuration);
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddDevelopmentCorsPolicy(builder.Configuration);
+                // For future services specific to development environment
+            }
+            else
+            {
+                builder.Services.AddProductionCorsPolicy(builder.Configuration);
+                // For future services specific to production environment
+            }
 
             var app = builder.Build();
 
@@ -27,6 +37,9 @@ namespace BrewAPI
 
             // Enforce HTTPS redirection
             app.UseHttpsRedirection();
+
+            // Configure CORS to allow requests from Frontend/React
+            app.UseCors("AllowReactApp");
 
             // Enable Authentication & Authorization
             app.UseAuthentication();
