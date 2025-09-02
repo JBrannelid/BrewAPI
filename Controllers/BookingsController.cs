@@ -1,4 +1,5 @@
-﻿using BrewAPI.DTOs;
+﻿using BrewAPI.DTOs.Bookings;
+using BrewAPI.DTOs.Tables;
 using BrewAPI.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -65,9 +66,9 @@ namespace BrewAPI.Controllers
         // POST: api/Bookings
         // Open to public since they must be able to book a table
         [HttpPost]
-        public async Task<ActionResult<int>> CreateBooking(CreateBookingDto createBookingDto)
+        public async Task<ActionResult<int>> CreateBooking(CreateBookingDTO createBookingDTO)
         {
-            var bookingId = await _bookingService.CreateBookingAsync(createBookingDto);
+            var bookingId = await _bookingService.CreateBookingAsync(createBookingDTO);
 
             if (bookingId == null)
             {
@@ -81,9 +82,9 @@ namespace BrewAPI.Controllers
         // For admin or manager to update a booking by Id if needed
         [HttpPut("{id}")]
         [Authorize(Policy = "AdminOrManager")]
-        public async Task<ActionResult> UpdateBooking(int id, UpdateBookingDto updateBookingDto)
+        public async Task<ActionResult> UpdateBooking(int id, UpdateBookingDTO updateBookingDTO)
         {
-            var result = await _bookingService.UpdateBookingAsync(id, updateBookingDto);
+            var result = await _bookingService.UpdateBookingAsync(id, updateBookingDTO);
             if (!result)
             {
                 // Returning 404 if trying to update a non-existing booking
@@ -110,7 +111,7 @@ namespace BrewAPI.Controllers
         // POST: api/Bookings/available-tables
         // Allows customers to check availability before creating a booking.
         [HttpPost("available-tables")]
-        public async Task<ActionResult<List<TableDTO>>> GetAvailableTables(AvailableTablesRequestDto request)
+        public async Task<ActionResult<List<TableDTO>>> GetAvailableTables(AvailableTablesRequestDTO request)
         {
             // flow: first check → then book.
             var availableTables = await _bookingService.GetAvailableTablesAsync(request);
