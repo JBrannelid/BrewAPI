@@ -1,4 +1,5 @@
-﻿using BrewAPI.DTOs;
+﻿using BrewAPI.DTOs.Auth;
+using BrewAPI.DTOs.User;
 
 namespace BrewAPI.Services.IServices
 {
