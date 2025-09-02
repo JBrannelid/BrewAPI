@@ -1,4 +1,5 @@
-﻿using BrewAPI.DTOs;
+﻿using BrewAPI.DTOs.Auth;
+using BrewAPI.DTOs.User;
 using BrewAPI.Services.IServices;
 
 // Service responsible for authentication operations (registration/login)
