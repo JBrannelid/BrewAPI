@@ -42,7 +42,8 @@ namespace BrewAPI.Data.Seeders
                     LastName = "Brannelid",
                     Email = "test@exempel.com",
                     Role = UserRole.Admin,
-                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123"),
+                    // Static hash password for avoid dynamic seed data (BCrypt) with each migration
+                    PasswordHash = "$2a$11$8Xl3E5qDNqK0rV2QcMkV4eJ1Q8P7K9zF0nR6tY3sW2hA5cU1mB7dO"
                 }
             );
         }
@@ -293,7 +294,7 @@ namespace BrewAPI.Data.Seeders
                     PK_BookingId = 1,
                     FK_CustomerId = 1,
                     FK_TableId = 1,
-                    BookingDate = DateOnly.FromDateTime(DateTime.Today.AddDays(1)),
+                    BookingDate = new DateOnly(2025, 9, 15), 
                     BookingTime = new TimeOnly(18, 30),
                     NumberGuests = 2,
                     DurationTime = TimeSpan.FromHours(BookingSettings.DefaultBookingDurationHours),
@@ -304,7 +305,7 @@ namespace BrewAPI.Data.Seeders
                     PK_BookingId = 2,
                     FK_CustomerId = 2,
                     FK_TableId = 3,
-                    BookingDate = DateOnly.FromDateTime(DateTime.Today.AddDays(2)),
+                    BookingDate = new DateOnly(2025, 9, 16), 
                     BookingTime = new TimeOnly(19, 0),
                     NumberGuests = 4,
                     DurationTime = TimeSpan.FromHours(BookingSettings.DefaultBookingDurationHours),
