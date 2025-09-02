@@ -1,4 +1,4 @@
-﻿using BrewAPI.DTOs;
+﻿using BrewAPI.DTOs.Tables;
 using BrewAPI.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
