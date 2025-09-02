@@ -1,4 +1,5 @@
-﻿using BrewAPI.DTOs;
+﻿using BrewAPI.DTOs.Bookings;
+using BrewAPI.DTOs.Tables;
 
 namespace BrewAPI.Services.IServices
 {
@@ -12,12 +13,12 @@ namespace BrewAPI.Services.IServices
 
         Task<List<BookingDTO>> GetBookingsByTableIdAndDateAsync(int tableId, DateOnly date);
 
-        Task<int?> CreateBookingAsync(CreateBookingDto createBookingDto);
+        Task<int?> CreateBookingAsync(CreateBookingDTO createBookingDTO);
 
-        Task<bool> UpdateBookingAsync(int bookingId, UpdateBookingDto updateBookingDto);
+        Task<bool> UpdateBookingAsync(int bookingId, UpdateBookingDTO updateBookingDTO);
 
         Task<bool> DeleteBookingAsync(int bookingId);
 
-        Task<List<TableDTO>> GetAvailableTablesAsync(AvailableTablesRequestDto request);
+        Task<List<TableDTO>> GetAvailableTablesAsync(AvailableTablesRequestDTO request);
     }
 }
