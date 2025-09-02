@@ -1,4 +1,4 @@
-﻿using BrewAPI.DTOs;
+﻿using BrewAPI.DTOs.Customers;
 using BrewAPI.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -45,9 +45,9 @@ namespace BrewAPI.Controllers
         // POST: api/Customers
         // Allows new customers to register themselves in the system
         [HttpPost]
-        public async Task<ActionResult<int>> CreateCustomer(CustomerDTO customerDto)
+        public async Task<ActionResult<int>> CreateCustomer(CreateCustomerDTO createCustomerDTO)
         {
-            var customerId = await _customerService.CreateCustomerAsync(customerDto);
+            var customerId = await _customerService.CreateCustomerAsync(createCustomerDTO);
 
             // 201 Created with header 
             return CreatedAtAction(nameof(GetCustomerById), new { id = customerId }, customerId);
@@ -57,9 +57,9 @@ namespace BrewAPI.Controllers
         // For admin or manager to update a customer by Id if needed
         [HttpPut("{id}")]
         [Authorize(Policy = "AdminOrManager")]
-        public async Task<ActionResult> UpdateCustomer(int id, CustomerDTO customerDto)
+        public async Task<ActionResult> UpdateCustomer(int id, UpdateCustomerDTO updateCustomerDTO)
         {
-            var result = await _customerService.UpdateCustomerAsync(id, customerDto);
+            var result = await _customerService.UpdateCustomerAsync(id, updateCustomerDTO);
             if (!result)
             {
                 // Returning 404 if trying to update a non-existing customer
