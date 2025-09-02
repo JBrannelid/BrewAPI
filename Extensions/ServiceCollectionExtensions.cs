@@ -114,5 +114,41 @@ namespace BrewAPI.Extensions
 
             return services;
         }
+
+        // Add production Cors. Look through in production how to configure it properly
+        public static IServiceCollection AddProductionCorsPolicy(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp", policy =>
+                {
+                    var allowedOrigins = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+
+                    policy.WithOrigins(allowedOrigins)
+                          .AllowAnyHeader()
+                          .AllowAnyMethod() // HTTP methods (GET, POST, etc.)
+                          .AllowCredentials(); // Allow credentials for JWT tokens
+                });
+            });
+            return services;
+        }
+
+        // Add dev Cors. Look through in production how to configure it properly
+        public static IServiceCollection AddDevelopmentCorsPolicy(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp", policy =>
+                {
+                    var allowedOrigins = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+
+                        policy.WithOrigins(allowedOrigins)
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowCredentials(); // Allow credentials for JWT tokens
+                });
+            });
+            return services;
+        }
     }
 }
