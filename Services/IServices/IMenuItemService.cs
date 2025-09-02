@@ -1,4 +1,4 @@
-﻿using BrewAPI.DTOs;
+﻿using BrewAPI.DTOs.MenuItems;
 
 namespace BrewAPI.Services.IServices
 {
