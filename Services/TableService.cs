@@ -1,4 +1,4 @@
-﻿using BrewAPI.DTOs;
+﻿using BrewAPI.DTOs.Tables;
 using BrewAPI.Models;
 using BrewAPI.Repositories.IRepositories;
 using BrewAPI.Services.IServices;
