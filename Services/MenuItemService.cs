@@ -55,55 +55,32 @@ namespace BrewAPI.Services
             return menuItemDTO;
         }
 
-        // Retrieve menu items filtered by category and map to DTOs
-        public async Task<List<MenuItemDTO>> GetMenuItemsByCategoryAsync(string category)
-        {
-            var menuItems = await _menuItemRepository.GetMenuItemByCategoryAsync(category);
-            var menuItemDTOs = menuItems.Select(m => new MenuItemDTO
-            {
-                MenuItemId = m.PK_MenuItemId,
-                Name = m.Name,
-                Category = m.Category,
-                Price = m.Price,
-                Description = m.Description,
-                IsPopular = m.IsPopular,
-                ImageUrl = m.ImageUrl
-            }).ToList();
-
-            return menuItemDTOs;
-        }
-
         // Retrieves all popular menu items (IsPopular = true)
-        public async Task<List<MenuItemDTO>> GetPopularMenuItemsAsync()
+        public async Task<List<PopularMenuItemDTO>> GetPopularMenuItemsAsync()
         {
             var allMenuItems = await _menuItemRepository.GetAllMenuItemAsync();
             var popularMenuItems = allMenuItems.Where(m => m.IsPopular).ToList();
 
-            var menuItemDTOs = popularMenuItems.Select(m => new MenuItemDTO
+            var popularMenuItemDTOs = popularMenuItems.Select(m => new PopularMenuItemDTO
             {
-                MenuItemId = m.PK_MenuItemId,
-                Name = m.Name,
-                Category = m.Category,
-                Price = m.Price,
                 Description = m.Description,
-                IsPopular = m.IsPopular,
                 ImageUrl = m.ImageUrl
             }).ToList();
 
-            return menuItemDTOs;
+            return popularMenuItemDTOs;
         }
 
         // Creates a new menu item. Returns the primary key (Id) of the created menu item
-        public async Task<int> CreateMenuItemAsync(MenuItemDTO menuItemDto)
+        public async Task<int> CreateMenuItemAsync(CreateMenuItemDTO createMenuItemDto)
         {
             var menuItem = new MenuItem
             {
-                Name = menuItemDto.Name,
-                Category = menuItemDto.Category,
-                Price = menuItemDto.Price,
-                Description = menuItemDto.Description,
-                IsPopular = menuItemDto.IsPopular,
-                ImageUrl = menuItemDto.ImageUrl
+                Name = createMenuItemDto.Name,
+                Category = createMenuItemDto.Category,
+                Price = createMenuItemDto.Price,
+                Description = createMenuItemDto.Description,
+                IsPopular = createMenuItemDto.IsPopular,
+                ImageUrl = createMenuItemDto.ImageUrl
             };
 
             var newMenuItemId = await _menuItemRepository.CreateMenuItemAsync(menuItem);
@@ -111,7 +88,7 @@ namespace BrewAPI.Services
         }
 
         // Updates an existing menu item. Returns true if update was successful, false if item not found
-        public async Task<bool> UpdateMenuItemAsync(int menuItemId, MenuItemDTO menuItemDto)
+        public async Task<bool> UpdateMenuItemAsync(int menuItemId, UpdateMenuItemDTO updateMenuItemDto)
         {
             var existingMenuItem = await _menuItemRepository.GetMenuItemByIdAsync(menuItemId);
             if (existingMenuItem == null)
@@ -119,12 +96,12 @@ namespace BrewAPI.Services
                 return false;
             }
 
-            existingMenuItem.Name = menuItemDto.Name;
-            existingMenuItem.Category = menuItemDto.Category;
-            existingMenuItem.Price = menuItemDto.Price;
-            existingMenuItem.Description = menuItemDto.Description;
-            existingMenuItem.IsPopular = menuItemDto.IsPopular;
-            existingMenuItem.ImageUrl = menuItemDto.ImageUrl;
+            existingMenuItem.Name = updateMenuItemDto.Name;
+            existingMenuItem.Category = updateMenuItemDto.Category;
+            existingMenuItem.Price = updateMenuItemDto.Price;
+            existingMenuItem.Description = updateMenuItemDto.Description;
+            existingMenuItem.IsPopular = updateMenuItemDto.IsPopular;
+            existingMenuItem.ImageUrl = updateMenuItemDto.ImageUrl;
 
             return await _menuItemRepository.UpdateMenuItemAsync(existingMenuItem);
         }
