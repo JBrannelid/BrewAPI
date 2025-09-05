@@ -3,7 +3,11 @@ using BrewAPI.DTOs.Tables;
 using BrewAPI.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+
+// For now: Authorize policy on AdminsOrManagers. Easy to scale up with different role 
+// Each function asynchronously handles CRUD operations
+// TODO: A better global error and logging handeling
+// TODO: Unsure of API calls. NOT testet with MVC core (Frontend) yet.
 
 namespace BrewAPI.Controllers
 {
@@ -18,8 +22,6 @@ namespace BrewAPI.Controllers
             _bookingService = bookingService;
         }
 
-        // GET: api/Bookings
-        // Restricted policy to Admin or Manager to protect customer privacy and sensitive data
         [HttpGet]
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<List<BookingDTO>>> GetAllBookings()
@@ -28,8 +30,6 @@ namespace BrewAPI.Controllers
             return Ok(bookings);
         }
 
-        // GET: api/Bookings/{id}
-        // Restricted policy to Admin or Manager to protect customer privacy and sensitive data
         [HttpGet("{id}")]
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<BookingDTO>> GetBookingById(int id)
@@ -43,8 +43,7 @@ namespace BrewAPI.Controllers
             return Ok(booking);
         }
 
-        // GET: api/Bookings/customer/{customerId}
-        // For admin or manager to see booking history of a specific customer
+
         [HttpGet("customer/{customerId}")]
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<List<BookingDTO>>> GetBookingsByCustomerId(int customerId)
@@ -53,8 +52,7 @@ namespace BrewAPI.Controllers
             return Ok(bookings);
         }
 
-        // GET: api/Bookings/table/{tableId}/date/{date}
-        // For admin or manager to check table availability or view reservations for a specific date
+
         [HttpGet("table/{tableId}/date/{date}")]
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<List<BookingDTO>>> GetBookingsByTableIdAndDate(int tableId, DateOnly date)
@@ -63,8 +61,6 @@ namespace BrewAPI.Controllers
             return Ok(bookings);
         }
 
-        // POST: api/Bookings
-        // Open to public since they must be able to book a table
         [HttpPost]
         public async Task<ActionResult<int>> CreateBooking(CreateBookingDTO createBookingDTO)
         {
@@ -78,8 +74,6 @@ namespace BrewAPI.Controllers
             return CreatedAtAction(nameof(GetBookingById), new { id = bookingId }, bookingId);
         }
 
-        // PUT: api/Bookings/{id}
-        // For admin or manager to update a booking by Id if needed
         [HttpPut("{id}")]
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult> UpdateBooking(int id, UpdateBookingDTO updateBookingDTO)
@@ -94,8 +88,6 @@ namespace BrewAPI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Bookings/{id}
-        // For admin or manager to prevent unauthorized deletion
         [HttpDelete("{id}")]
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult> DeleteBooking(int id)
@@ -108,8 +100,6 @@ namespace BrewAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Bookings/available-tables
-        // Allows customers to check availability before creating a booking.
         [HttpPost("available-tables")]
         public async Task<ActionResult<List<TableDTO>>> GetAvailableTables(AvailableTablesRequestDTO request)
         {
