@@ -8,8 +8,6 @@ namespace BrewAPI.Repositories.IRepositories
 
         Task<Table?> GetTableByIdAsync(int tableId);
 
-        Task<Table?> GetTableByTableNumberAsync(int tableNumber);
-
         Task<int> CreateTableAsync(Table table);
 
         Task<bool> UpdateTableAsync(Table table);
