@@ -3,6 +3,11 @@ using BrewAPI.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+// For now: Authorize policy on AdminsOrManagers. Easy to scale up with different role 
+// Each function asynchronously handles CRUD operations
+// TODO: A better global error and logging handeling
+// TODO: Unsure of API calls. NOT testet with REACT (Frontend) yet
+
 namespace BrewAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -11,14 +16,11 @@ namespace BrewAPI.Controllers
     {
         private readonly ICustomerService _customerService;
 
-        // Using dependency injection to separate business logic from the controller
         public CustomersController(ICustomerService customerService)
         {
             _customerService = customerService;
         }
 
-        // GET: api/Customers
-        // For admin or manager to retrieve all customers
         [HttpGet]
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<List<CustomerDTO>>> GetAllCustomers()
@@ -27,8 +29,6 @@ namespace BrewAPI.Controllers
             return Ok(customers);
         }
 
-        // GET: api/Customers/{id}
-        // For admin or manager to fetch a customer by Id
         [HttpGet("{id}")]
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<CustomerDTO>> GetCustomerById(int id)
@@ -42,8 +42,6 @@ namespace BrewAPI.Controllers
             return Ok(customer);
         }
 
-        // POST: api/Customers
-        // Allows new customers to register themselves in the system
         [HttpPost]
         public async Task<ActionResult<int>> CreateCustomer(CreateCustomerDTO createCustomerDTO)
         {
@@ -53,8 +51,6 @@ namespace BrewAPI.Controllers
             return CreatedAtAction(nameof(GetCustomerById), new { id = customerId }, customerId);
         }
 
-        // PUT: api/Customers/{id}
-        // For admin or manager to update a customer by Id if needed
         [HttpPut("{id}")]
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult> UpdateCustomer(int id, UpdateCustomerDTO updateCustomerDTO)
@@ -69,8 +65,6 @@ namespace BrewAPI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Customers/{id}
-        // For admin or manager to delete a customer record
         [HttpDelete("{id}")]
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult> DeleteCustomer(int id)
