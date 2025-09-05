@@ -4,6 +4,8 @@ using BrewAPI.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 // Controller responsible for authentication endpoints (register & login)
+// TODO: A better global error and logging handeling
+
 namespace BrewAPI.Controllers
 {
     [Route("api/[controller]")]
