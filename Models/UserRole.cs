@@ -8,4 +8,6 @@
     }
 }
 
+// Use in
 // Determines access level and permissions throughout the application
+// Easy to scale up with different role 
