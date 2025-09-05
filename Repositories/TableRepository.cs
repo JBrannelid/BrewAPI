@@ -48,14 +48,6 @@ namespace BrewAPI.Repositories
             return table;
         }
 
-        // Retrieves a single table by TableNumber. Returns null if the table does not exist
-        public async Task<Table?> GetTableByTableNumberAsync(int tableNumber)
-        {
-            var table = await _context.Tables
-                .FirstOrDefaultAsync(t => t.TableNumber == tableNumber);
-            return table;
-        }
-
         // Updates an existing table in the Db. Returns true if any row was affected, false if no changes were made
         public async Task<bool> UpdateTableAsync(Table table)
         {
