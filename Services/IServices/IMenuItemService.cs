@@ -8,13 +8,11 @@ namespace BrewAPI.Services.IServices
 
         Task<MenuItemDTO?> GetMenuItemByIdAsync(int menuItemId);
 
-        Task<List<MenuItemDTO>> GetMenuItemsByCategoryAsync(string category);
+        Task<List<PopularMenuItemDTO>> GetPopularMenuItemsAsync();
 
-        Task<List<MenuItemDTO>> GetPopularMenuItemsAsync();
+        Task<int> CreateMenuItemAsync(CreateMenuItemDTO createMenuItemDto);
 
-        Task<int> CreateMenuItemAsync(MenuItemDTO menuItemDTO);
-
-        Task<bool> UpdateMenuItemAsync(int menuItemId, MenuItemDTO menuItemDTO);
+        Task<bool> UpdateMenuItemAsync(int menuItemId, UpdateMenuItemDTO updateMenuItemDto);
 
         Task<bool> DeleteMenuItemAsync(int menuItemId);
     }
