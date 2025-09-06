@@ -3,92 +3,58 @@ using BrewAPI.Models;
 using BrewAPI.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
 
+// This repository extends the GenericRepository class 
+// CRUD operations are inherited from GenericRepository
+// Override specific methods and add additional methods to handle specific business logic
+
 namespace BrewAPI.Repositories
 {
-    public class BookingRepository : IBookingRepository
+    public class BookingRepository : GenericRepository<Booking>, IBookingRepository
     {
-        private readonly BrewAPIDbContext _context;
-
-        public BookingRepository(BrewAPIDbContext context)
+        public BookingRepository(BrewAPIDbContext context) : base(context)
         {
-            _context = context;
         }
 
-        // Adds a new booking to the Db and return Id of the new booking
-        public async Task<int> CreateBookingAsync(Booking booking)
+        public override async Task<Booking?> GetByIdAsync(int id)
         {
-            _context.Bookings.Add(booking);
-            await _context.SaveChangesAsync();
-            return booking.PK_BookingId;
+            return await _dbSet
+                .Include(b => b.Customer)
+                .Include(b => b.Table)
+                .FirstOrDefaultAsync(b => b.PK_BookingId == id);
         }
 
-        // Deletes a booking by Id
-        // Returns true if a row was affected, false otherwise
-        public async Task<bool> DeleteBookingAsync(int bookingId)
+        public override async Task<IEnumerable<Booking>> GetAllAsync()
         {
-            var rowsAffected = await _context.Bookings
-                .Where(b => b.PK_BookingId == bookingId).ExecuteDeleteAsync();
-            if (rowsAffected > 0)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        // Retrieves a list of all bookings related to a Customer and Table data
-        public async Task<List<Booking>> GetAllBookingsAsync()
-        {
-            var bookings = await _context.Bookings
+            return await _dbSet
                 .Include(b => b.Customer)
                 .Include(b => b.Table)
                 .ToListAsync();
-            return bookings;
         }
 
-        // Retrieves a single booking by its Id
-        // Returns null (FirstOrDefault) if the booking does not exist
-        public async Task<Booking?> GetBookingByIdAsync(int bookingId)
+        public override async Task<bool> DeleteAsync(int id)
         {
-            var booking = await _context.Bookings
-                .Include(b => b.Customer)
-                .Include(b => b.Table)
-                .FirstOrDefaultAsync(b => b.PK_BookingId == bookingId);
-            return booking;
+            var rowsAffected = await _dbSet
+                .Where(b => b.PK_BookingId == id).ExecuteDeleteAsync();
+            return rowsAffected > 0;
         }
 
-        // Retrieves all bookings for a specific customer
+        // Navigation methods
         public async Task<List<Booking>> GetBookingsByCustomerIdAsync(int customerId)
         {
-            var bookings = await _context.Bookings
+            return await _dbSet
                 .Include(b => b.Customer)
                 .Include(b => b.Table)
                 .Where(b => b.FK_CustomerId == customerId)
                 .ToListAsync();
-            return bookings;
         }
 
-        // Retrieves all bookings for a specific table on a specific date
         public async Task<List<Booking>> GetBookingsByTableIdAndDateAsync(int tableId, DateOnly date)
         {
-            var bookings = await _context.Bookings
+            return await _dbSet
                 .Include(b => b.Customer)
                 .Include(b => b.Table)
                 .Where(b => b.FK_TableId == tableId && b.BookingDate == date)
                 .ToListAsync();
-            return bookings;
-        }
-
-        // Updates an existing booking in the Db
-        // Returns true if any row was affected, false if no changes were mad
-        public async Task<bool> UpdateBookingAsync(Booking booking)
-        {
-            _context.Bookings.Update(booking);
-            var result = await _context.SaveChangesAsync();
-            if (result != 0)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }
