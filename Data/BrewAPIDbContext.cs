@@ -88,7 +88,9 @@ namespace BrewAPI.Data
             menuItemEntity.Property(e => e.Price).IsRequired().HasColumnType("decimal(7,2)");
             menuItemEntity.Property(e => e.Description).HasMaxLength(500);
             menuItemEntity.Property(e => e.IsPopular).HasDefaultValue(false);
-            menuItemEntity.Property(e => e.ImageUrl).HasMaxLength(255);
+            menuItemEntity.Property(e => e.ImageUrl)
+                .HasMaxLength(255)
+                .HasDefaultValue("https://plus.unsplash.com/premium_photo-1661349883108-3aea72f4a83f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZW1wdHklMjBwbGF0ZXxlbnwwfHwwfHx8MA%3D%3D"); 
         }
 
         // User entity configuration
