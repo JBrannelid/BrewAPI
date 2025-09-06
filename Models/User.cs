@@ -1,8 +1,9 @@
 ﻿namespace BrewAPI.Models
 {
-    public class User
+    public class User : IEntity
     {
         public int UserId { get; set; }
+        public int Id => UserId;
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
