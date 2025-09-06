@@ -154,8 +154,10 @@ namespace BrewAPI.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ImageUrl")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(255)")
+                        .HasDefaultValue("https://plus.unsplash.com/premium_photo-1661349883108-3aea72f4a83f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZW1wdHklMjBwbGF0ZXxlbnwwfHwwfHx8MA%3D%3D");
 
                     b.Property<bool>("IsPopular")
                         .ValueGeneratedOnAdd()
