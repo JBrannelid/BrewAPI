@@ -17,7 +17,7 @@ namespace BrewAPI.Services
         // Retrieve all menu items from Db and map to DTOs
         public async Task<List<MenuItemDTO>> GetAllMenuItemsAsync()
         {
-            var menuItems = await _menuItemRepository.GetAllMenuItemAsync();
+            var menuItems = await _menuItemRepository.GetAllAsync();
             var menuItemDTOs = menuItems.Select(m => new MenuItemDTO
             {
                 MenuItemId = m.PK_MenuItemId,
@@ -35,7 +35,7 @@ namespace BrewAPI.Services
         // Retrieve a specific menu item by ID and map to DTO
         public async Task<MenuItemDTO?> GetMenuItemByIdAsync(int menuItemId)
         {
-            var menuItem = await _menuItemRepository.GetMenuItemByIdAsync(menuItemId);
+            var menuItem = await _menuItemRepository.GetByIdAsync(menuItemId);
             if (menuItem == null)
             {
                 return null;
@@ -58,7 +58,7 @@ namespace BrewAPI.Services
         // Retrieves all popular menu items (IsPopular = true)
         public async Task<List<PopularMenuItemDTO>> GetPopularMenuItemsAsync()
         {
-            var allMenuItems = await _menuItemRepository.GetAllMenuItemAsync();
+            var allMenuItems = await _menuItemRepository.GetAllAsync();
             var popularMenuItems = allMenuItems.Where(m => m.IsPopular).ToList();
 
             var popularMenuItemDTOs = popularMenuItems.Select(m => new PopularMenuItemDTO
@@ -83,14 +83,14 @@ namespace BrewAPI.Services
                 ImageUrl = createMenuItemDto.ImageUrl
             };
 
-            var newMenuItemId = await _menuItemRepository.CreateMenuItemAsync(menuItem);
-            return newMenuItemId;
+            var createdMenuItem = await _menuItemRepository.CreateAsync(menuItem);
+            return createdMenuItem.PK_MenuItemId;
         }
 
         // Updates an existing menu item. Returns true if update was successful, false if item not found
         public async Task<bool> UpdateMenuItemAsync(int menuItemId, UpdateMenuItemDTO updateMenuItemDto)
         {
-            var existingMenuItem = await _menuItemRepository.GetMenuItemByIdAsync(menuItemId);
+            var existingMenuItem = await _menuItemRepository.GetByIdAsync(menuItemId);
             if (existingMenuItem == null)
             {
                 return false;
@@ -103,13 +103,14 @@ namespace BrewAPI.Services
             existingMenuItem.IsPopular = updateMenuItemDto.IsPopular;
             existingMenuItem.ImageUrl = updateMenuItemDto.ImageUrl;
 
-            return await _menuItemRepository.UpdateMenuItemAsync(existingMenuItem);
+            await _menuItemRepository.UpdateAsync(existingMenuItem);
+            return true;
         }
 
         // Deletes a menu item by ID. Returns true if deletion was successful, false if item not found
         public async Task<bool> DeleteMenuItemAsync(int menuItemId)
         {
-            return await _menuItemRepository.DeleteMenuItemAsync(menuItemId);
+            return await _menuItemRepository.DeleteAsync(menuItemId);
         }
     }
 }
