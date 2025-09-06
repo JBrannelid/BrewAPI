@@ -17,7 +17,7 @@ namespace BrewAPI.Services
         // Retrieves all users from the database
         public async Task<List<UserDTO>> GetAllUsersAsync()
         {
-            var users = await _userRepository.GetAllUsersAsync();
+            var users = await _userRepository.GetAllAsync();
             var userDTOs = users.Select(u => new UserDTO
             {
                 UserId = u.UserId,
@@ -33,7 +33,7 @@ namespace BrewAPI.Services
         // Retrieves a user by their ID or returns null if not found
         public async Task<UserDTO?> GetUserByIdAsync(int userId)
         {
-            var user = await _userRepository.GetUserByIdAsync(userId);
+            var user = await _userRepository.GetByIdAsync(userId);
             if (user == null)
             {
                 return null;
@@ -71,14 +71,14 @@ namespace BrewAPI.Services
                 PasswordHash = passwordHash
             };
 
-            var newUserId = await _userRepository.CreateUserAsync(user);
-            return newUserId;
+            var createdUser = await _userRepository.CreateAsync(user);
+            return createdUser.UserId;
         }
 
         // Updates an existing user's details. Returns true if update succeeded, false if user not found
         public async Task<bool> UpdateUserAsync(int userId, UserDTO userDTO)
         {
-            var existingUser = await _userRepository.GetUserByIdAsync(userId);
+            var existingUser = await _userRepository.GetByIdAsync(userId);
             if (existingUser == null)
             {
                 return false;
@@ -89,13 +89,14 @@ namespace BrewAPI.Services
             existingUser.Email = userDTO.Email;
             existingUser.Role = userDTO.Role;
 
-            return await _userRepository.UpdateUserAsync(existingUser);
+            await _userRepository.UpdateAsync(existingUser);
+            return true;
         }
 
         // Deletes a user by their ID. Returns true if deletion succeeded, false if user not found
         public async Task<bool> DeleteUserAsync(int userId)
         {
-            return await _userRepository.DeleteUserAsync(userId);
+            return await _userRepository.DeleteAsync(userId);
         }
     }
 }
