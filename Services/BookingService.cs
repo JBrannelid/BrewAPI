@@ -11,20 +11,18 @@ namespace BrewAPI.Services
     public class BookingService : IBookingService
     {
         private readonly IBookingRepository _bookingRepository;
-        private readonly ITableRepository _tableRepository;
-        private readonly ICustomerRepository _customerRepository;
+        private readonly IGenericRepository<Table> _tableRepository; 
 
-        public BookingService(IBookingRepository bookingRepository, ITableRepository tableRepository, ICustomerRepository customerRepository)
+        public BookingService(IBookingRepository bookingRepository, IGenericRepository<Table> tableRepository)
         {
             _bookingRepository = bookingRepository;
             _tableRepository = tableRepository;
-            _customerRepository = customerRepository;
         }
 
         // Retrieves all bookings and includes related Customer and Table data
         public async Task<List<BookingDTO>> GetAllBookingsAsync()
         {
-            var bookings = await _bookingRepository.GetAllBookingsAsync();
+            var bookings = await _bookingRepository.GetAllAsync();
             var bookingDTOs = bookings.Select(b => new BookingDTO
             {
                 BookingId = b.PK_BookingId,
@@ -58,7 +56,7 @@ namespace BrewAPI.Services
         // Retrieves a single booking by Id or null if not found
         public async Task<BookingDTO?> GetBookingByIdAsync(int bookingId)
         {
-            var booking = await _bookingRepository.GetBookingByIdAsync(bookingId);
+            var booking = await _bookingRepository.GetByIdAsync(bookingId);
             if (booking == null)
             {
                 return null;
@@ -187,13 +185,14 @@ namespace BrewAPI.Services
                 DurationTime = TimeSpan.FromHours(BookingSettings.DefaultBookingDurationHours)
             };
 
-            return await _bookingRepository.CreateBookingAsync(booking);
+            var createdBooking = await _bookingRepository.CreateAsync(booking);
+            return createdBooking.PK_BookingId;
         }
 
         // Updates an existing booking or returns false if not found
         public async Task<bool> UpdateBookingAsync(int bookingId, UpdateBookingDTO updateBookingDto)
         {
-            var existingBooking = await _bookingRepository.GetBookingByIdAsync(bookingId);
+            var existingBooking = await _bookingRepository.GetByIdAsync(bookingId);
             if (existingBooking == null)
             {
                 return false;
@@ -207,20 +206,21 @@ namespace BrewAPI.Services
             existingBooking.Status = updateBookingDto.Status;
             existingBooking.DurationTime = updateBookingDto.DurationTime;
 
-            return await _bookingRepository.UpdateBookingAsync(existingBooking);
+            await _bookingRepository.UpdateAsync(existingBooking);
+            return true;
         }
 
         // Deletes a booking by Id
         public async Task<bool> DeleteBookingAsync(int bookingId)
         {
-            return await _bookingRepository.DeleteBookingAsync(bookingId);
+            return await _bookingRepository.DeleteAsync(bookingId);
         }
 
         // Returns list of available tables for a given date, time, and number of guests
         // Checks capacity, availability flag, and existing bookings to avoid conflicts
         public async Task<List<TableDTO>> GetAvailableTablesAsync(AvailableTablesRequestDTO request)
         {
-            var allTables = await _tableRepository.GetAllTableAsync();
+            var allTables = await _tableRepository.GetAllAsync();
             var availableTables = new List<TableDTO>();
 
             foreach (var table in allTables)
