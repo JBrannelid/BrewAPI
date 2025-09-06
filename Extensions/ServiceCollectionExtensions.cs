@@ -29,13 +29,14 @@ namespace BrewAPI.Extensions
             return services;
         }
 
-        // Add repositories
+        // Add generic and specifik repositories
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
+            // Generic repository
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            // Specific repositories
             services.AddScoped<IBookingRepository, BookingRepository>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IMenuItemRepository, MenuItemRepository>();
-            services.AddScoped<ITableRepository, TableRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
