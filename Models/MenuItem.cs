@@ -1,8 +1,9 @@
 ﻿namespace BrewAPI.Models
 {
-    public class MenuItem
+    public class MenuItem : IEntity
     {
         public int PK_MenuItemId { get; set; }
+        public int Id => PK_MenuItemId; 
         public string Name { get; set; }
         public string? Category { get; set; }
         public decimal Price { get; set; }
