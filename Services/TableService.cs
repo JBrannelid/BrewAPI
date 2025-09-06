@@ -7,9 +7,9 @@ namespace BrewAPI.Services
 {
     public class TableService : ITableService
     {
-        private readonly ITableRepository _tableRepository;
+        private readonly IGenericRepository<Table> _tableRepository; 
 
-        public TableService(ITableRepository tableRepository)
+        public TableService(IGenericRepository<Table> tableRepository)
         {
             _tableRepository = tableRepository;
         }
@@ -17,14 +17,12 @@ namespace BrewAPI.Services
         // Retrieves all tables from the database
         public async Task<List<GetTableDTO>> GetAllTablesAsync()
         {
-            var tables = await _tableRepository.GetAllTableAsync();
+            var tables = await _tableRepository.GetAllAsync();
             var tableDTOs = tables.Select(t => new GetTableDTO
             {
                 TableId = t.PK_TableId,
                 TableNumber = t.TableNumber,
                 Capacity = t.Capacity,
-                // IsAvailable is not included in the DTO as per current design
-                //IsAvailable = t.IsAvailable
             }).ToList();
 
             return tableDTOs;
@@ -33,7 +31,7 @@ namespace BrewAPI.Services
         // Retrieves a table by its ID or returns null if not found
         public async Task<TableDTO?> GetTableByIdAsync(int tableId)
         {
-            var table = await _tableRepository.GetTableByIdAsync(tableId);
+            var table = await _tableRepository.GetByIdAsync(tableId);
             if (table == null)
             {
                 return null;
@@ -44,8 +42,7 @@ namespace BrewAPI.Services
                 TableId = table.PK_TableId,
                 TableNumber = table.TableNumber,
                 Capacity = table.Capacity,
-                // The DTO does not currently include IsAvailable
-                //IsAvailable = table.IsAvailable
+                IsAvailable = table.IsAvailable
             };
 
             return tableDTO;
@@ -58,16 +55,17 @@ namespace BrewAPI.Services
             {
                 TableNumber = createTableDTO.TableNumber,
                 Capacity = createTableDTO.Capacity,
+                IsAvailable = true 
             };
 
-            var newTableId = await _tableRepository.CreateTableAsync(table);
-            return newTableId;
+            var createdTable = await _tableRepository.CreateAsync(table);
+            return createdTable.PK_TableId;
         }
 
         // Updates an existing table. Returns true if update succeeded, false if table not found
         public async Task<bool> UpdateTableAsync(int tableId, UpdateTableDTO updateTableDTO)
         {
-            var existingTable = await _tableRepository.GetTableByIdAsync(tableId);
+            var existingTable = await _tableRepository.GetByIdAsync(tableId);
             if (existingTable == null)
             {
                 return false;
@@ -77,13 +75,14 @@ namespace BrewAPI.Services
             existingTable.Capacity = updateTableDTO.Capacity;
             existingTable.IsAvailable = updateTableDTO.IsAvailable;
 
-            return await _tableRepository.UpdateTableAsync(existingTable);
+            await _tableRepository.UpdateAsync(existingTable);
+            return true;
         }
 
         // Deletes a table by its ID. Returns true if deletion succeeded, false if table not found
         public async Task<bool> DeleteTableAsync(int tableId)
         {
-            return await _tableRepository.DeleteTableAsync(tableId);
+            return await _tableRepository.DeleteAsync(tableId);
         }
     }
 }
