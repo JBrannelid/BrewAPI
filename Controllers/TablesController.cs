@@ -46,22 +46,34 @@ namespace BrewAPI.Controllers
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<int>> CreateTable(CreateTableDTO createTableDTO)
         {
-            var tableId = await _tableService.CreateTableAsync(createTableDTO);
-
-            // Return 201 Created with location header
-            return CreatedAtAction(nameof(GetTableById), new { id = tableId }, tableId);
+            try
+            {
+                var tableId = await _tableService.CreateTableAsync(createTableDTO);
+                return CreatedAtAction(nameof(GetTableById), new { id = tableId }, tableId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error creating table: {ex.Message}");
+            }
         }
 
         [HttpPut("{id}")]
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult> UpdateTable(int id, UpdateTableDTO updateTableDto)
         {
-            var result = await _tableService.UpdateTableAsync(id, updateTableDto);
-            if (!result)
+            try
             {
-                return NotFound();
+                var result = await _tableService.UpdateTableAsync(id, updateTableDto);
+                if (!result)
+                {
+                    return NotFound();
+                }
+                return NoContent();
             }
-            return NoContent();
+            catch (Exception ex)
+            {
+                return BadRequest($"Error updating table: {ex.Message}");
+            }
         }
 
         [HttpDelete("{id}")]
