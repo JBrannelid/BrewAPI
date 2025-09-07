@@ -1,4 +1,5 @@
 ﻿using BrewAPI.DTOs.User;
+using BrewAPI.Extensions.Mapping;
 using BrewAPI.Models;
 using BrewAPI.Repositories.IRepositories;
 using BrewAPI.Services.IServices;
@@ -18,37 +19,14 @@ namespace BrewAPI.Services
         public async Task<List<UserDTO>> GetAllUsersAsync()
         {
             var users = await _userRepository.GetAllAsync();
-            var userDTOs = users.Select(u => new UserDTO
-            {
-                UserId = u.UserId,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                Email = u.Email,
-                Role = u.Role
-            }).ToList();
-
-            return userDTOs;
+            return users.Select(u => u.MapToUserDto()).ToList();
         }
 
         // Retrieves a user by their ID or returns null if not found
         public async Task<UserDTO?> GetUserByIdAsync(int userId)
         {
             var user = await _userRepository.GetByIdAsync(userId);
-            if (user == null)
-            {
-                return null;
-            }
-
-            var userDTO = new UserDTO
-            {
-                UserId = user.UserId,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Role = user.Role
-            };
-
-            return userDTO;
+            return user?.MapToUserDto();
         }
 
         // Retrieves a user by their email (email entity) or returns null if not found
@@ -60,17 +38,7 @@ namespace BrewAPI.Services
         // Creates a new user and returns the new user's ID (primary key)
         public async Task<int> CreateUserAsync(UserRegisterDTO userRegisterDTO)
         {
-            var passwordHash = BCrypt.Net.BCrypt.HashPassword(userRegisterDTO.Password);
-
-            var user = new User
-            {
-                FirstName = userRegisterDTO.FirstName,
-                LastName = userRegisterDTO.LastName,
-                Email = userRegisterDTO.Email,
-                Role = UserRole.User,
-                PasswordHash = passwordHash
-            };
-
+            var user = userRegisterDTO.MapToUser();
             var createdUser = await _userRepository.CreateAsync(user);
             return createdUser.UserId;
         }
@@ -84,11 +52,7 @@ namespace BrewAPI.Services
                 return false;
             }
 
-            existingUser.FirstName = userDTO.FirstName;
-            existingUser.LastName = userDTO.LastName;
-            existingUser.Email = userDTO.Email;
-            existingUser.Role = userDTO.Role;
-
+            userDTO.MapToUser(existingUser);
             await _userRepository.UpdateAsync(existingUser);
             return true;
         }
