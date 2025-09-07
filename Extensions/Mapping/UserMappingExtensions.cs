@@ -26,7 +26,7 @@ namespace BrewAPI.Extensions.Mapping
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
-                Role = UserRole.User,
+                Role = dto.Role,
                 PasswordHash = passwordHash
             };
         }
