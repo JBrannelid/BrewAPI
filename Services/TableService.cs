@@ -1,4 +1,5 @@
 ﻿using BrewAPI.DTOs.Tables;
+using BrewAPI.Extensions.Mapping;
 using BrewAPI.Models;
 using BrewAPI.Repositories.IRepositories;
 using BrewAPI.Services.IServices;
@@ -7,7 +8,7 @@ namespace BrewAPI.Services
 {
     public class TableService : ITableService
     {
-        private readonly IGenericRepository<Table> _tableRepository; 
+        private readonly IGenericRepository<Table> _tableRepository;
 
         public TableService(IGenericRepository<Table> tableRepository)
         {
@@ -18,46 +19,20 @@ namespace BrewAPI.Services
         public async Task<List<GetTableDTO>> GetAllTablesAsync()
         {
             var tables = await _tableRepository.GetAllAsync();
-            var tableDTOs = tables.Select(t => new GetTableDTO
-            {
-                TableId = t.PK_TableId,
-                TableNumber = t.TableNumber,
-                Capacity = t.Capacity,
-            }).ToList();
-
-            return tableDTOs;
+            return tables.Select(t => t.MapToGetTableDto()).ToList();
         }
 
         // Retrieves a table by its ID or returns null if not found
         public async Task<TableDTO?> GetTableByIdAsync(int tableId)
         {
             var table = await _tableRepository.GetByIdAsync(tableId);
-            if (table == null)
-            {
-                return null;
-            }
-
-            var tableDTO = new TableDTO
-            {
-                TableId = table.PK_TableId,
-                TableNumber = table.TableNumber,
-                Capacity = table.Capacity,
-                IsAvailable = table.IsAvailable
-            };
-
-            return tableDTO;
+            return table?.MapToTableDto();
         }
 
         // Creates a new table and returns its Id (Primary key)
         public async Task<int> CreateTableAsync(CreateTableDTO createTableDTO)
         {
-            var table = new Table
-            {
-                TableNumber = createTableDTO.TableNumber,
-                Capacity = createTableDTO.Capacity,
-                IsAvailable = true 
-            };
-
+            var table = createTableDTO.MapToTable();
             var createdTable = await _tableRepository.CreateAsync(table);
             return createdTable.PK_TableId;
         }
@@ -71,10 +46,7 @@ namespace BrewAPI.Services
                 return false;
             }
 
-            existingTable.TableNumber = updateTableDTO.TableNumber;
-            existingTable.Capacity = updateTableDTO.Capacity;
-            existingTable.IsAvailable = updateTableDTO.IsAvailable;
-
+            updateTableDTO.MapToTable(existingTable);
             await _tableRepository.UpdateAsync(existingTable);
             return true;
         }
