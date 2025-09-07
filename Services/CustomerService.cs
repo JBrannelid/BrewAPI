@@ -1,4 +1,5 @@
 ﻿using BrewAPI.DTOs.Customers;
+using BrewAPI.Extensions.Mapping;
 using BrewAPI.Models;
 using BrewAPI.Repositories.IRepositories;
 using BrewAPI.Services.IServices;
@@ -7,7 +8,7 @@ namespace BrewAPI.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly IGenericRepository<Customer> _customerRepository; 
+        private readonly IGenericRepository<Customer> _customerRepository;
 
         public CustomerService(IGenericRepository<Customer> customerRepository)
         {
@@ -17,45 +18,18 @@ namespace BrewAPI.Services
         public async Task<List<CustomerDTO>> GetAllCustomersAsync()
         {
             var customers = await _customerRepository.GetAllAsync();
-            var customerDTOs = customers.Select(c => new CustomerDTO
-            {
-                CustomerId = c.PK_CustomerId,
-                Name = c.Name,
-                PhoneNumber = c.PhoneNumber,
-                Email = c.Email
-            }).ToList();
-
-            return customerDTOs;
+            return customers.Select(c => c.MapToCustomerDto()).ToList();
         }
 
         public async Task<CustomerDTO?> GetCustomerByIdAsync(int customerId)
         {
             var customer = await _customerRepository.GetByIdAsync(customerId);
-            if (customer == null)
-            {
-                return null;
-            }
-
-            var customerDTO = new CustomerDTO
-            {
-                CustomerId = customer.PK_CustomerId,
-                Name = customer.Name,
-                PhoneNumber = customer.PhoneNumber,
-                Email = customer.Email
-            };
-
-            return customerDTO;
+            return customer?.MapToCustomerDto();
         }
 
         public async Task<int> CreateCustomerAsync(CreateCustomerDTO createCustomerDTO)
         {
-            var customer = new Customer
-            {
-                Name = createCustomerDTO.Name,
-                PhoneNumber = createCustomerDTO.PhoneNumber,
-                Email = createCustomerDTO.Email
-            };
-
+            var customer = createCustomerDTO.MapToCustomer();
             var createdCustomer = await _customerRepository.CreateAsync(customer);
             return createdCustomer.PK_CustomerId;
         }
@@ -68,10 +42,7 @@ namespace BrewAPI.Services
                 return false;
             }
 
-            existingCustomer.Name = updateCustomerDTO.Name;
-            existingCustomer.PhoneNumber = updateCustomerDTO.PhoneNumber;
-            existingCustomer.Email = updateCustomerDTO.Email;
-
+            updateCustomerDTO.MapToCustomer(existingCustomer);
             await _customerRepository.UpdateAsync(existingCustomer);
             return true;
         }
