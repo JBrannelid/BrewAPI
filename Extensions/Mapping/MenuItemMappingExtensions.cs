@@ -9,7 +9,7 @@ namespace BrewAPI.Extensions.Mapping
         {
             return new MenuItemDTO
             {
-                MenuItemId = entity.PK_MenuItemId,
+                MenuItemId = entity.Id,
                 Name = entity.Name,
                 Category = entity.Category,
                 Price = entity.Price,

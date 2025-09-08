@@ -9,7 +9,7 @@ namespace BrewAPI.Extensions.Mapping
         {
             return new UserDTO
             {
-                UserId = entity.UserId,
+                UserId = entity.Id,
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
                 Email = entity.Email,

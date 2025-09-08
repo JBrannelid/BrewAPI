@@ -21,12 +21,12 @@ namespace BrewAPI.Data.Seeders
         private static void SeedTables(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Table>().HasData(
-                new Table { PK_TableId = 1, TableNumber = 1, Capacity = 2, IsAvailable = true },
-                new Table { PK_TableId = 2, TableNumber = 2, Capacity = 4, IsAvailable = true },
-                new Table { PK_TableId = 3, TableNumber = 3, Capacity = 6, IsAvailable = true },
-                new Table { PK_TableId = 4, TableNumber = 4, Capacity = 8, IsAvailable = true },
-                new Table { PK_TableId = 5, TableNumber = 5, Capacity = 2, IsAvailable = true },
-                new Table { PK_TableId = 6, TableNumber = 6, Capacity = 4, IsAvailable = true }
+                new Table { Id = 1, TableNumber = 1, Capacity = 2, IsAvailable = true },
+                new Table { Id = 2, TableNumber = 2, Capacity = 4, IsAvailable = true },
+                new Table { Id = 3, TableNumber = 3, Capacity = 6, IsAvailable = true },
+                new Table { Id = 4, TableNumber = 4, Capacity = 8, IsAvailable = true },
+                new Table { Id = 5, TableNumber = 5, Capacity = 2, IsAvailable = true },
+                new Table { Id = 6, TableNumber = 6, Capacity = 4, IsAvailable = true }
             );
         }
         // Seed customers
@@ -35,14 +35,14 @@ namespace BrewAPI.Data.Seeders
             modelBuilder.Entity<Customer>().HasData(
                 new Customer
                 {
-                    PK_CustomerId = 1,
+                    Id = 1,
                     Name = "Test Testsson",
                     PhoneNumber = "070-1234567",
                     Email = "test@exempel.com"
                 },
                 new Customer
                 {
-                    PK_CustomerId = 2,
+                    Id = 2,
                     Name = "Tian Tiansson",
                     PhoneNumber = "076-1234567",
                     Email = "tian@exempel.com"
@@ -57,7 +57,7 @@ namespace BrewAPI.Data.Seeders
             modelBuilder.Entity<MenuItem>().HasData(
                 new MenuItem
                 {
-                    PK_MenuItemId = 1,
+                    Id = 1,
                     Name = "Ceasarsallad Räkor",
                     Category = "Salads",
                     Price = 145.00m,
@@ -67,7 +67,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 2,
+                    Id = 2,
                     Name = "Ceasarsallad",
                     Category = "Salads",
                     Price = 145.00m,
@@ -77,7 +77,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 3,
+                    Id = 3,
                     Name = "Tonfisksallad",
                     Category = "Salads",
                     Price = 145.00m,
@@ -87,7 +87,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 4,
+                    Id = 4,
                     Name = "Chevré Salad",
                     Category = "Salads",
                     Price = 125.00m,
@@ -98,7 +98,7 @@ namespace BrewAPI.Data.Seeders
                 // Bowls
                 new MenuItem
                 {
-                    PK_MenuItemId = 5,
+                    Id = 5,
                     Name = "Din-Din Bap Bowl",
                     Category = "Bowls",
                     Price = 188.00m,
@@ -108,7 +108,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 6,
+                    Id = 6,
                     Name = "Sneaky Samurai Bowl",
                     Category = "Bowls",
                     Price = 164.00m,
@@ -118,7 +118,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 7,
+                    Id = 7,
                     Name = "Karaage Bowl",
                     Category = "Bowls",
                     Price = 164.00m,
@@ -130,7 +130,7 @@ namespace BrewAPI.Data.Seeders
                 // Deserts
                 new MenuItem
                 {
-                    PK_MenuItemId = 8,
+                    Id = 8,
                     Name = "Dubai chocolate crêpe",
                     Category = "Desserts",
                     Price = 85.00m,
@@ -140,7 +140,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 9,
+                    Id = 9,
                     Name = "Croissant",
                     Category = "Desserts",
                     Price = 45.00m,
@@ -150,7 +150,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 10,
+                    Id = 10,
                     Name = "Pumpkin Bun",
                     Category = "Desserts",
                     Price = 45.00m,
@@ -160,7 +160,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 11,
+                    Id = 11,
                     Name = "Mudcake",
                     Category = "Desserts",
                     Price = 65.00m,
@@ -170,7 +170,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 12,
+                    Id = 12,
                     Name = "Moussekaka Cookies & Cream",
                     Category = "Desserts",
                     Price = 65.00m,
@@ -183,7 +183,7 @@ namespace BrewAPI.Data.Seeders
                 // Beverages
                 new MenuItem
                 {
-                    PK_MenuItemId = 13,
+                    Id = 13,
                     Name = "Cappuccino",
                     Category = "Beverages",
                     Price = 45.00m,
@@ -194,7 +194,7 @@ namespace BrewAPI.Data.Seeders
 
                 new MenuItem
                 {
-                    PK_MenuItemId = 14,
+                    Id = 14,
                     Name = "Ismatcha",
                     Category = "Beverages",
                     Price = 45.00m,
@@ -204,7 +204,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 15,
+                    Id = 15,
                     Name = "Iced Latte",
                     Category = "Beverages",
                     Price = 45.00m,
@@ -214,7 +214,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 16,
+                    Id = 16,
                     Name = "Latte",
                     Category = "Beverages",
                     Price = 45.00m,
@@ -224,7 +224,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 17,
+                    Id = 17,
                     Name = "Hot Coffee",
                     Category = "Beverages",
                     Price = 45.00m,
@@ -234,7 +234,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 18,
+                    Id = 18,
                     Name = "Caramel Frappuccino",
                     Category = "Beverages",
                     Price = 45.00m,
@@ -244,7 +244,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 19,
+                    Id = 19,
                     Name = "Caramel Frappuccino",
                     Category = "Beverages",
                     Price = 45.00m,
@@ -255,7 +255,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new MenuItem
                 {
-                    PK_MenuItemId = 20,
+                    Id = 20,
                     Name = "Tea Selection",
                     Category = "Beverages",
                     Price = 40.00m,
@@ -272,7 +272,7 @@ namespace BrewAPI.Data.Seeders
             modelBuilder.Entity<Booking>().HasData(
                 new Booking
                 {
-                    PK_BookingId = 1,
+                    Id = 1,
                     FK_CustomerId = 1,
                     FK_TableId = 1,
                     BookingDate = new DateOnly(2025, 9, 15), 
@@ -283,7 +283,7 @@ namespace BrewAPI.Data.Seeders
                 },
                 new Booking
                 {
-                    PK_BookingId = 2,
+                    Id = 2,
                     FK_CustomerId = 2,
                     FK_TableId = 3,
                     BookingDate = new DateOnly(2025, 9, 16), 

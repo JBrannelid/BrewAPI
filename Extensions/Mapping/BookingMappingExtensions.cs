@@ -1,5 +1,4 @@
 ﻿using BrewAPI.DTOs.Bookings;
-using BrewAPI.DTOs.Customers;
 using BrewAPI.DTOs.Tables;
 using BrewAPI.Models;
 using BrewAPI.Settings;
@@ -12,7 +11,7 @@ namespace BrewAPI.Extensions.Mapping
         {
             return new BookingDTO
             {
-                BookingId = entity.PK_BookingId,
+                BookingId = entity.Id,
                 CustomerId = entity.FK_CustomerId,
                 TableId = entity.FK_TableId,
                 BookingDate = entity.BookingDate,
@@ -34,7 +33,7 @@ namespace BrewAPI.Extensions.Mapping
                 BookingDate = dto.BookingDate,
                 BookingTime = dto.BookingTime,
                 NumberGuests = dto.NumberGuests,
-                Status = dto.Status,
+                Status = "Pending", // Alla nya bokningar skapas med "Pending" status
                 DurationTime = TimeSpan.FromHours(BookingSettings.DefaultBookingDurationHours)
             };
         }
@@ -48,6 +47,32 @@ namespace BrewAPI.Extensions.Mapping
             entity.NumberGuests = dto.NumberGuests;
             entity.Status = dto.Status;
             entity.DurationTime = dto.DurationTime;
+        }
+
+        public static BookingAvailabilityDTO MapToBookingAvailabilityDto(DateOnly date, TimeOnly time, int numberOfGuests, List<TableDTO> availableTables)
+        {
+            return new BookingAvailabilityDTO
+            {
+                Date = date,
+                Time = time,
+                NumberGuests = numberOfGuests,
+                AvailableTables = availableTables.Select(t => new AvailableTableDTO
+                {
+                    TableId = t.TableId,
+                    TableNumber = t.TableNumber,
+                    Capacity = t.Capacity
+                }).ToList()
+            };
+        }
+
+        public static AvailableTablesDTO MapToAvailableTablesRequest(DateOnly date, TimeOnly time, int numberOfGuests)
+        {
+            return new AvailableTablesDTO
+            {
+                BookingDate = date,
+                BookingTime = time,
+                NumberGuests = numberOfGuests
+            };
         }
     }
 }

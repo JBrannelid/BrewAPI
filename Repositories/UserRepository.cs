@@ -15,17 +15,6 @@ namespace BrewAPI.Repositories
         {
         }
 
-        public override async Task<User?> GetByIdAsync(int id)
-        {
-            return await _dbSet.FirstOrDefaultAsync(u => u.UserId == id);
-        }
-
-        public override async Task<bool> DeleteAsync(int id)
-        {
-            var rowsAffected = await _dbSet.Where(u => u.UserId == id).ExecuteDeleteAsync();
-            return rowsAffected > 0;
-        }
-
         public async Task<User?> GetUserByEmailAsync(string email)
         {
             return await _dbSet.FirstOrDefaultAsync(u => u.Email == email);

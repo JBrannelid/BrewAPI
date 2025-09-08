@@ -15,27 +15,12 @@ namespace BrewAPI.Repositories
         {
         }
 
-        public override async Task<Booking?> GetByIdAsync(int id)
-        {
-            return await _dbSet
-                .Include(b => b.Customer)
-                .Include(b => b.Table)
-                .FirstOrDefaultAsync(b => b.PK_BookingId == id);
-        }
-
         public override async Task<IEnumerable<Booking>> GetAllAsync()
         {
             return await _dbSet
                 .Include(b => b.Customer)
                 .Include(b => b.Table)
                 .ToListAsync();
-        }
-
-        public override async Task<bool> DeleteAsync(int id)
-        {
-            var rowsAffected = await _dbSet
-                .Where(b => b.PK_BookingId == id).ExecuteDeleteAsync();
-            return rowsAffected > 0;
         }
 
         // Navigation methods

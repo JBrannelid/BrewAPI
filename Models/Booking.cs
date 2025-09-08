@@ -2,8 +2,7 @@
 {
     public class Booking : IEntity
     {
-        public int PK_BookingId { get; set; }
-        public int Id => PK_BookingId; 
+        public int Id { get; set; }
         public int FK_CustomerId { get; set; }
         public int FK_TableId { get; set; }
         public Customer? Customer { get; set; }

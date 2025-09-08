@@ -40,7 +40,7 @@ namespace BrewAPI.Services
         {
             var user = userRegisterDTO.MapToUser();
             var createdUser = await _userRepository.CreateAsync(user);
-            return createdUser.UserId;
+            return createdUser.Id;
         }
 
         // Updates an existing user's details. Returns true if update succeeded, false if user not found

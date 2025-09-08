@@ -9,7 +9,7 @@ namespace BrewAPI.Extensions.Mapping
         {
             return new TableDTO
             {
-                TableId = entity.PK_TableId,
+                TableId = entity.Id,
                 TableNumber = entity.TableNumber,
                 Capacity = entity.Capacity,
                 IsAvailable = entity.IsAvailable
@@ -20,7 +20,7 @@ namespace BrewAPI.Extensions.Mapping
         {
             return new GetTableDTO
             {
-                TableId = entity.PK_TableId,
+                TableId = entity.Id,
                 TableNumber = entity.TableNumber,
                 Capacity = entity.Capacity
             };

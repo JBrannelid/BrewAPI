@@ -34,7 +34,7 @@ namespace BrewAPI.Services
         {
             var table = createTableDTO.MapToTable();
             var createdTable = await _tableRepository.CreateAsync(table);
-            return createdTable.PK_TableId;
+            return createdTable.Id;
         }
 
         // Updates an existing table. Returns true if update succeeded, false if table not found

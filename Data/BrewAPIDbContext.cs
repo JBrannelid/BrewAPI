@@ -40,7 +40,7 @@ namespace BrewAPI.Data
         private static void ConfigureTableEntity(ModelBuilder modelBuilder)
         {
             var tableEntity = modelBuilder.Entity<Table>();
-            tableEntity.HasKey(e => e.PK_TableId);
+            tableEntity.HasKey(e => e.Id); 
             tableEntity.HasIndex(e => e.TableNumber).IsUnique();
             tableEntity.Property(e => e.TableNumber).IsRequired();
             tableEntity.Property(e => e.Capacity).IsRequired();
@@ -51,19 +51,19 @@ namespace BrewAPI.Data
         private static void ConfigureCustomerEntity(ModelBuilder modelBuilder)
         {
             var customerEntity = modelBuilder.Entity<Customer>();
-            customerEntity.HasKey(e => e.PK_CustomerId);
+            customerEntity.HasKey(e => e.Id);
             customerEntity.Property(e => e.Name).IsRequired().HasMaxLength(100);
             customerEntity.Property(e => e.PhoneNumber).IsRequired().HasMaxLength(20);
-            customerEntity.Property(e => e.Email).HasMaxLength(100);
-            customerEntity.HasIndex(e => e.Email).IsUnique();
             customerEntity.HasIndex(e => e.PhoneNumber).IsUnique();
+            customerEntity.Property(e => e.Email).HasMaxLength(100).IsRequired();
+            customerEntity.HasIndex(e => e.Email).IsUnique();
         }
 
         // Booking entity configuration
         private static void ConfigureBookingEntity(ModelBuilder modelBuilder)
         {
             var bookingEntity = modelBuilder.Entity<Booking>();
-            bookingEntity.HasKey(e => e.PK_BookingId);
+            bookingEntity.HasKey(e => e.Id);
             bookingEntity.Property(e => e.BookingDate).IsRequired();
             bookingEntity.Property(e => e.BookingTime).IsRequired();
             bookingEntity.Property(e => e.NumberGuests).IsRequired();
@@ -82,7 +82,7 @@ namespace BrewAPI.Data
         private static void ConfigureMenuItemEntity(ModelBuilder modelBuilder)
         {
             var menuItemEntity = modelBuilder.Entity<MenuItem>();
-            menuItemEntity.HasKey(e => e.PK_MenuItemId);
+            menuItemEntity.HasKey(e => e.Id);
             menuItemEntity.Property(e => e.Name).IsRequired().HasMaxLength(100);
             menuItemEntity.Property(e => e.Category).HasMaxLength(50);
             menuItemEntity.Property(e => e.Price).IsRequired().HasColumnType("decimal(7,2)");
@@ -97,7 +97,7 @@ namespace BrewAPI.Data
         private static void ConfigureUserEntity(ModelBuilder modelBuilder)
         {
             var userEntity = modelBuilder.Entity<User>();
-            userEntity.HasKey(u => u.UserId);
+            userEntity.HasKey(u => u.Id);
             userEntity.Property(u => u.FirstName)
                 .IsRequired()
                 .HasMaxLength(100);
