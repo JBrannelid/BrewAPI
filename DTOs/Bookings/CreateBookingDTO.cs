@@ -4,7 +4,6 @@
     {
         public int CustomerId { get; set; }
         public int NumberGuests { get; set; }
-        public string Status { get; set; } = "Confirmed";
         public int TableId { get; set; }
         public DateOnly BookingDate { get; set; }
         public TimeOnly BookingTime { get; set; }

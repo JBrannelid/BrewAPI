@@ -1,6 +1,6 @@
 ﻿namespace BrewAPI.DTOs.Bookings
 {
-    public class AvailableTablesRequestDTO
+    public class AvailableTablesDTO
     {
         public int NumberGuests { get; set; }
         public DateOnly BookingDate { get; set; }

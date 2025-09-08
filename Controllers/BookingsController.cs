@@ -1,13 +1,13 @@
 ﻿using BrewAPI.DTOs.Bookings;
 using BrewAPI.DTOs.Tables;
 using BrewAPI.Services.IServices;
+using BrewAPI.Settings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For now: Authorize policy on AdminsOrManagers. Easy to scale up with different role 
 // Each function asynchronously handles CRUD operations
 // TODO: A better global error and logging handeling
-// TODO: Unsure of API calls. NOT testet with MVC core (Frontend) yet.
 
 namespace BrewAPI.Controllers
 {
@@ -37,7 +37,6 @@ namespace BrewAPI.Controllers
             var booking = await _bookingService.GetBookingByIdAsync(id);
             if (booking == null)
             {
-                // Returning 404 (when booking not found)
                 return NotFound();
             }
             return Ok(booking);
@@ -78,13 +77,11 @@ namespace BrewAPI.Controllers
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult> UpdateBooking(int id, UpdateBookingDTO updateBookingDTO)
         {
-            var result = await _bookingService.UpdateBookingAsync(id, updateBookingDTO);
-            if (!result)
+            var booking = await _bookingService.UpdateBookingAsync(id, updateBookingDTO);
+            if (!booking)
             {
-                // Returning 404 if trying to update a non-existing booking
                 return NotFound();
             }
-            // 204 - when update succeeds but no body is returned
             return NoContent();
         }
 
@@ -92,8 +89,8 @@ namespace BrewAPI.Controllers
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult> DeleteBooking(int id)
         {
-            var result = await _bookingService.DeleteBookingAsync(id);
-            if (!result)
+            var booking = await _bookingService.DeleteBookingAsync(id);
+            if (!booking)
             {
                 return NotFound();
             }
@@ -101,11 +98,36 @@ namespace BrewAPI.Controllers
         }
 
         [HttpPost("available-tables")]
-        public async Task<ActionResult<List<TableDTO>>> GetAvailableTables(AvailableTablesRequestDTO request)
+        public async Task<ActionResult<List<TableDTO>>> GetAvailableTables(AvailableTablesDTO request)
         {
-            // flow: first check → then book.
+            // Check if the requested booking date/time is available
             var availableTables = await _bookingService.GetAvailableTablesAsync(request);
             return Ok(availableTables);
+        }
+
+        [HttpGet("time-slots")]
+        [Authorize(Policy = "AdminOrManager")]
+        public ActionResult<List<TimeOnly>> GetAvailableTimeSlots()
+        {
+            // Returns all possible booking time slots within opening hours defined in BookingSettings
+            var timeSlots = _bookingService.GetAvailableTimeSlots();
+            return Ok(timeSlots);
+        }
+
+        [HttpGet("availability")]
+        [Authorize(Policy = "AdminOrManager")]
+        public async Task<ActionResult<BookingAvailabilityDTO>> GetBookingAvailability(
+            DateOnly date,
+            TimeOnly time,
+            int numberOfGuests)
+        {
+            if (!_bookingService.IsValidBookingTime(time))
+            {
+                return BadRequest($"Invalid booking time. Bookings are only allowed on {BookingSettings.BookingTimeIntervalMinutes}-minute intervals between {BookingSettings.OpeningTime:HH:mm} and {BookingSettings.ClosingTime:HH:mm}.");
+            }
+
+            var availability = await _bookingService.GetBookingAvailabilityAsync(date, time, numberOfGuests);
+            return Ok(availability);
         }
     }
 }

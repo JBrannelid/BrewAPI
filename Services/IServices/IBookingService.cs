@@ -19,6 +19,9 @@ namespace BrewAPI.Services.IServices
 
         Task<bool> DeleteBookingAsync(int bookingId);
 
-        Task<List<TableDTO>> GetAvailableTablesAsync(AvailableTablesRequestDTO request);
+        Task<List<TableDTO>> GetAvailableTablesAsync(AvailableTablesDTO request);
+        bool IsValidBookingTime(TimeOnly bookingTime);
+        List<TimeOnly> GetAvailableTimeSlots();
+        Task<BookingAvailabilityDTO> GetBookingAvailabilityAsync(DateOnly date, TimeOnly time, int numberOfGuests);
     }
 }
