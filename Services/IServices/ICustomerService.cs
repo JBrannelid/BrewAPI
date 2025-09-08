@@ -13,5 +13,7 @@ namespace BrewAPI.Services.IServices
         Task<bool> UpdateCustomerAsync(int customerId, UpdateCustomerDTO updateCustomerDTO);
 
         Task<bool> DeleteCustomerAsync(int customerId);
+
+        Task<List<CustomerSearchDTO>> SearchCustomersAsync(string searchTerm);
     }
 }

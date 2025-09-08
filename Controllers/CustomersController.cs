@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 // For now: Authorize policy on AdminsOrManagers. Easy to scale up with different role 
 // Each function asynchronously handles CRUD operations
 // TODO: A better global error and logging handeling
-// TODO: Unsure of API calls. NOT testet with REACT (Frontend) yet
 
 namespace BrewAPI.Controllers
 {
@@ -36,7 +35,6 @@ namespace BrewAPI.Controllers
             var customer = await _customerService.GetCustomerByIdAsync(id);
             if (customer == null)
             {
-                // 404 if customer doesn’t exist
                 return NotFound();
             }
             return Ok(customer);
@@ -55,8 +53,8 @@ namespace BrewAPI.Controllers
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult> UpdateCustomer(int id, UpdateCustomerDTO updateCustomerDTO)
         {
-            var result = await _customerService.UpdateCustomerAsync(id, updateCustomerDTO);
-            if (!result)
+            var customer = await _customerService.UpdateCustomerAsync(id, updateCustomerDTO);
+            if (!customer)
             {
                 // Returning 404 if trying to update a non-existing customer
                 return NotFound();
@@ -69,14 +67,28 @@ namespace BrewAPI.Controllers
         [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult> DeleteCustomer(int id)
         {
-            var result = await _customerService.DeleteCustomerAsync(id);
-            if (!result)
+            var customer = await _customerService.DeleteCustomerAsync(id);
+            if (!customer)
             {
                 // 404 if trying to delete a non-existing customer
                 return NotFound();
             }
             // 204 No Content on successful deletion
             return NoContent();
+        }
+
+        [HttpGet("search")]
+        [Authorize(Policy = "AdminOrManager")]
+        public async Task<ActionResult<List<CustomerSearchDTO>>> SearchCustomers([FromQuery] string searchTerm)
+        {
+            // Prevents db query when the search term is not meaningful 
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return Ok(new List<CustomerSearchDTO>());
+            }
+
+            var matchedCustomers = await _customerService.SearchCustomersAsync(searchTerm);
+            return Ok(matchedCustomers);
         }
     }
 }

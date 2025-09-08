@@ -8,9 +8,9 @@ namespace BrewAPI.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly IGenericRepository<Customer> _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public CustomerService(IGenericRepository<Customer> customerRepository)
+        public CustomerService(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
         }
@@ -31,7 +31,7 @@ namespace BrewAPI.Services
         {
             var customer = createCustomerDTO.MapToCustomer();
             var createdCustomer = await _customerRepository.CreateAsync(customer);
-            return createdCustomer.PK_CustomerId;
+            return createdCustomer.Id;
         }
 
         public async Task<bool> UpdateCustomerAsync(int customerId, UpdateCustomerDTO updateCustomerDTO)
@@ -50,6 +50,11 @@ namespace BrewAPI.Services
         public async Task<bool> DeleteCustomerAsync(int customerId)
         {
             return await _customerRepository.DeleteAsync(customerId);
+        }
+
+        public async Task<List<CustomerSearchDTO>> SearchCustomersAsync(string searchTerm)
+        {
+            return await _customerRepository.SearchAsync(searchTerm);
         }
     }
 }
