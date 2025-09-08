@@ -6,5 +6,6 @@
         public int TableNumber { get; set; }
         public int Capacity { get; set; }
         public bool IsAvailable { get; set; } // For internal availability 
+        public string DisplayText => $"Table {TableNumber} (Capacity: {Capacity})";
     }
 }
