@@ -36,8 +36,8 @@ namespace BrewAPI.Extensions
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             // Specific repositories
             services.AddScoped<IBookingRepository, BookingRepository>();
-            services.AddScoped<IMenuItemRepository, MenuItemRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             return services;
         }

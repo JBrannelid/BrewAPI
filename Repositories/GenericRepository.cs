@@ -23,9 +23,9 @@ namespace BrewAPI.Repositories
 
         public virtual async Task<T?> GetByIdAsync(int id)
         {
-            // Find IEntity.Id insteed of dbSet primary key
-            return await _dbSet.FindAsync(id);
+            return await _dbSet.FindAsync(id); 
         }
+
         public virtual async Task<T> CreateAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
@@ -44,17 +44,11 @@ namespace BrewAPI.Repositories
 
         public virtual async Task<bool> DeleteAsync(int id)
         {
-            // Find to get entity first, then remove it
             var entity = await _dbSet.FindAsync(id);
-            if (entity == null)
-            {
-                return false;
-            }
+            if (entity == null) return false;
 
             _dbSet.Remove(entity);
-            var rowsAffected = await _context.SaveChangesAsync();
-            // If more than 0 rows affected, return true
-            return rowsAffected > 0;
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

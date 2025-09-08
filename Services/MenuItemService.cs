@@ -8,9 +8,9 @@ namespace BrewAPI.Services
 {
     public class MenuItemService : IMenuItemService
     {
-        private readonly IMenuItemRepository _menuItemRepository;
+        private readonly IGenericRepository<MenuItem> _menuItemRepository;
 
-        public MenuItemService(IMenuItemRepository menuItemRepository)
+        public MenuItemService(IGenericRepository<MenuItem> menuItemRepository)
         {
             _menuItemRepository = menuItemRepository;
         }
@@ -42,7 +42,7 @@ namespace BrewAPI.Services
         {
             var menuItem = createMenuItemDto.MapToMenuItem();
             var createdMenuItem = await _menuItemRepository.CreateAsync(menuItem);
-            return createdMenuItem.PK_MenuItemId;
+            return createdMenuItem.Id;
         }
 
         // Updates an existing menu item. Returns true if update was successful, false if item not found
