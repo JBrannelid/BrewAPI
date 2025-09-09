@@ -394,3 +394,4 @@ FodyWeavers.xsd
 *.sln.iml
 '@ | Out-File -FilePath .gitignore -Encoding utf8
 /appsettings.json
+/appsettings.Development.json
