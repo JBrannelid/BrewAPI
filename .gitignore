@@ -393,3 +393,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 '@ | Out-File -FilePath .gitignore -Encoding utf8
+/appsettings.json
