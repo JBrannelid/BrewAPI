@@ -50,7 +50,7 @@ namespace BrewAPI.Data.Seeders
             );
         }
 
-        // Seed menu items (unsplash.com img for copyright reasons)
+        // Seed menu items (unsplash/pixabay img for copyright reasons)
         private static void SeedMenuItems(ModelBuilder modelBuilder)
         {
             // Salads
@@ -123,7 +123,7 @@ namespace BrewAPI.Data.Seeders
                     Category = "Bowls",
                     Price = 164.00m,
                     Description = "Kycklinglårfilé, ris, mango, teriyaksås, sojamajo, salladslök, togarashi, chili, soja, avokado, sojabönor, kimchi, picklad rödkål, smashed spicy cucumber",
-                    IsPopular = false,
+                    IsPopular = true,
                     ImageUrl = "https://plus.unsplash.com/premium_photo-1705056547195-a68c45f2d77e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZCUyMGJvd2x8ZW58MHx8MHx8fDA%3D"
                 },
 
@@ -136,7 +136,7 @@ namespace BrewAPI.Data.Seeders
                     Price = 85.00m,
                     Description = "Fransk crêpe med pistagekräm, choklad och vaniljglass",
                     IsPopular = true,
-                    ImageUrl = "https://images.unsplash.com/photo-1723691802547-b79f65c16b5f?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    ImageUrl = "https://cdn.pixabay.com/photo/2021/11/07/16/40/chocolate-6777186_1280.jpg"
                 },
                 new MenuItem
                 {
@@ -199,7 +199,7 @@ namespace BrewAPI.Data.Seeders
                     Category = "Beverages",
                     Price = 45.00m,
                     Description = "Sötat grönt matchate, serverat med kall havredryck och is",
-                    IsPopular = true,
+                    IsPopular = false,
                     ImageUrl = "https://images.unsplash.com/photo-1717603545758-88cc454db69b?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 },
                 new MenuItem
@@ -239,7 +239,7 @@ namespace BrewAPI.Data.Seeders
                     Category = "Beverages",
                     Price = 45.00m,
                     Description = "Vaniljshake med smak av choklad. Toppad med vispgrädde",
-                    IsPopular = true,
+                    IsPopular = false,
                     ImageUrl = "https://images.unsplash.com/photo-1572490122747-3968b75cc699?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 },
                 new MenuItem
@@ -260,7 +260,7 @@ namespace BrewAPI.Data.Seeders
                     Category = "Beverages",
                     Price = 40.00m,
                     Description = "Grönt, svart eller rött té i olika smaker",
-                    IsPopular = true,
+                    IsPopular = false,
                     ImageUrl = "https://plus.unsplash.com/premium_photo-1674406481284-43eba097a291?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 }
             );
