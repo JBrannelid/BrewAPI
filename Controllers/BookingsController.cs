@@ -106,7 +106,6 @@ namespace BrewAPI.Controllers
         }
 
         [HttpGet("time-slots")]
-        [Authorize(Policy = "AdminOrManager")]
         public ActionResult<List<TimeOnly>> GetAvailableTimeSlots()
         {
             // Returns all possible booking time slots within opening hours defined in BookingSettings
