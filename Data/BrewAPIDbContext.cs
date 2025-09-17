@@ -54,9 +54,7 @@ namespace BrewAPI.Data
             customerEntity.HasKey(e => e.Id);
             customerEntity.Property(e => e.Name).IsRequired().HasMaxLength(100);
             customerEntity.Property(e => e.PhoneNumber).IsRequired().HasMaxLength(20);
-            customerEntity.HasIndex(e => e.PhoneNumber).IsUnique();
             customerEntity.Property(e => e.Email).HasMaxLength(100).IsRequired();
-            customerEntity.HasIndex(e => e.Email).IsUnique();
         }
 
         // Booking entity configuration
