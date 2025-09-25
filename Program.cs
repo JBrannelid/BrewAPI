@@ -38,8 +38,8 @@ namespace BrewAPI
             // Enforce HTTPS redirection
             app.UseHttpsRedirection();
 
-            // Configure CORS to allow requests from Frontend/React
-            app.UseCors("AllowReactApp");
+            // Configure CORS to allow requests from Frontend
+            app.UseCors("AllowLocalApp");
 
             // Enable Authentication & Authorization
             app.UseAuthentication();

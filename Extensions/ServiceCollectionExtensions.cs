@@ -121,7 +121,7 @@ namespace BrewAPI.Extensions
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowReactApp", policy =>
+                options.AddPolicy("AllowLocalApp", policy =>
                 {
                     var allowedOrigins = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
 
@@ -139,7 +139,7 @@ namespace BrewAPI.Extensions
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowReactApp", policy =>
+                options.AddPolicy("AllowLocalApp", policy =>
                 {
                     var allowedOrigins = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
 
